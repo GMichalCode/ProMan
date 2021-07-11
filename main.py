@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 
 import queries
 from util import json_response
@@ -6,11 +6,15 @@ from util import json_response
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
     """
     This is a one-pager which shows all the boards and cards
     """
+    if request.method == "POST":
+        if request.form['board-title']:
+            add_board(request.form['board-title'])
+
     return render_template('index.html')
 
 
@@ -69,7 +73,7 @@ def get_card(card_id: int):
     return queries.get_card(card_id)
 
 
-@app.route("/add-board", methods=["POST"])
+@app.route("/add-board")
 @json_response
 def add_board(board_title):
     queries.add_board(board_title)

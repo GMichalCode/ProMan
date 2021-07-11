@@ -86,4 +86,4 @@ def add_board(board_title):
         INSERT INTO boards (title)
         VALUES (%(board_title)s);
         """
-        , {"board_name": board_title})
+        , {"board_title": board_title})
