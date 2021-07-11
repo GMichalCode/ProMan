@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
 
-import queires
+import queries
 from util import json_response
 
 app = Flask(__name__)
@@ -20,13 +20,13 @@ def get_boards():
     """
     All the boards
     """
-    return queires.get_boards()
+    return queries.get_boards()
 
 
 @app.route("/get-boards/<int:board_id>")
 @json_response
 def get_board(board_id):
-    return queires.get_board(board_id)
+    return queries.get_board(board_id)
 
 
 @app.route("/get-statuses")
@@ -35,7 +35,7 @@ def get_statuses():
     """
     All the boards
     """
-    return queires.get_statuses()
+    return queries.get_statuses()
 
 
 @app.route("/get-statuses/<int:status_id>")
@@ -44,7 +44,7 @@ def get_status(status_id):
     """
     All the boards
     """
-    return queires.get_status(status_id)
+    return queries.get_status(status_id)
 
 
 @app.route("/get-cards/<int:board_id>")
@@ -55,7 +55,7 @@ def get_cards_for_board(board_id: int):
     :param board_id: id of the parent board
     """
     "something to commit in case of adding new branches"
-    return queires.get_cards_for_board(board_id)
+    return queries.get_cards_for_board(board_id)
 
 
 @app.route("/get-card/<int:card_id>")
@@ -66,14 +66,14 @@ def get_card(card_id: int):
     :param board_id: id of the parent board
     """
     "something to commit in case of adding new branches"
-    return queires.get_card(card_id)
+    return queries.get_card(card_id)
 
 
 # @app.route("/add-board")
 # @json_response
 # def get_board(board_name):
 #
-#     return queires.add_board(board_name)
+#     return queries.add_board(board_name)
 
 
 def main():
