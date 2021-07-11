@@ -60,13 +60,6 @@ def get_card(card_id):
         """, {"card_id": card_id}, False)
 
     return card
-# def add_board(board_name):
-#     data_manager.execute_insert(
-#         """
-#         INSERT INTO boards (title)
-#         VALUES (%(board_name)s);
-#         """
-#         , {"board_name": board_name})
 
 
 def get_statuses():
@@ -85,3 +78,12 @@ def get_status(status_id):
         WHERE s.id = %(status_id)s
         ;
         """, {"status_id": status_id}, False)
+
+
+def add_board(board_title):
+    data_manager.execute_insert(
+        """
+        INSERT INTO boards (title)
+        VALUES (%(board_title)s);
+        """
+        , {"board_name": board_title})

@@ -47,7 +47,7 @@ def get_status(status_id):
     return queries.get_status(status_id)
 
 
-@app.route("/get-cards/<int:board_id>")
+@app.route("/get-board-cards/<int:board_id>")
 @json_response
 def get_cards_for_board(board_id: int):
     """
@@ -58,7 +58,7 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
-@app.route("/get-card/<int:card_id>")
+@app.route("/get-cards/<int:card_id>")
 @json_response
 def get_card(card_id: int):
     """
@@ -69,11 +69,10 @@ def get_card(card_id: int):
     return queries.get_card(card_id)
 
 
-# @app.route("/add-board")
-# @json_response
-# def get_board(board_name):
-#
-#     return queries.add_board(board_name)
+@app.route("/add-board", methods=["POST"])
+@json_response
+def add_board(board_title):
+    queries.add_board(board_title)
 
 
 def main():
