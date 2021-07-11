@@ -54,10 +54,19 @@ def get_cards_for_board(board_id):
     return matching_cards
 
 
-def add_board(board_name):
-    data_manager.execute_insert(
+# def add_board(board_name):
+#     data_manager.execute_insert(
+#         """
+#         INSERT INTO boards (title)
+#         VALUES (%(board_name)s);
+#         """
+#         , {"board_name": board_name})
+
+
+def get_statuses():
+    return data_manager.execute_select(
         """
-        INSERT INTO boards (title)
-        VALUES (%(board_name)s);
+        SELECT * FROM statuses
+        ;
         """
-        , {"board_name": board_name})
+    )

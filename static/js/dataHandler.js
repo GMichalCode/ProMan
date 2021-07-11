@@ -10,6 +10,8 @@ export let dataHandler = {
     },
     getStatuses: async function () {
         // the statuses are retrieved and then the callback function is called with the statuses
+        let response = await apiGet('/get-statuses')
+        return response
     },
     getStatus: async function (statusId) {
         // the status is retrieved and then the callback function is called with the status
