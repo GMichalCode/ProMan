@@ -38,6 +38,15 @@ def get_statuses():
     return queires.get_statuses()
 
 
+@app.route("/get-statuses/<int:status_id>")
+@json_response
+def get_status(status_id):
+    """
+    All the boards
+    """
+    return queires.get_status(status_id)
+
+
 @app.route("/get-cards/<int:board_id>")
 @json_response
 def get_cards_for_board(board_id: int):
