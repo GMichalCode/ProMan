@@ -1,4 +1,5 @@
 import os
+
 import psycopg2
 import psycopg2.extras
 
@@ -58,3 +59,8 @@ def execute_select(statement, variables=None, fetchall=True):
             result_set = cursor.fetchall() if fetchall else cursor.fetchone()
     return result_set
 
+
+def execute_insert(statement, variables):
+    with establish_connection() as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+            cursor.execute(statement, variables)
