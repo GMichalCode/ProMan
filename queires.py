@@ -54,6 +54,16 @@ def get_cards_for_board(board_id):
     return matching_cards
 
 
+def get_card(card_id):
+    card = data_manager.execute_select(
+        """
+        SELECT * FROM cards c
+        WHERE c.id = %(card_id)s
+        ;
+        """
+        , {"card_id": card_id}, False)
+
+    return card
 # def add_board(board_name):
 #     data_manager.execute_insert(
 #         """

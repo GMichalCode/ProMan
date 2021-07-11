@@ -23,7 +23,7 @@ def get_boards():
     return queires.get_boards()
 
 
-@app.route("/get-board/<int:board_id>")
+@app.route("/get-boards/<int:board_id>")
 @json_response
 def get_board(board_id):
     return queires.get_board(board_id)
@@ -56,6 +56,17 @@ def get_cards_for_board(board_id: int):
     """
     "something to commit in case of adding new branches"
     return queires.get_cards_for_board(board_id)
+
+
+@app.route("/get-card/<int:card_id>")
+@json_response
+def get_card(card_id: int):
+    """
+    All cards that belongs to a board
+    :param board_id: id of the parent board
+    """
+    "something to commit in case of adding new branches"
+    return queires.get_card(card_id)
 
 
 # @app.route("/add-board")
