@@ -47,7 +47,6 @@ def execute_select(statement, variables=None, fetchall=True):
     """
     Execute SELECT statement optionally parameterized.
     Use fetchall=False to get back one value (fetchone)
-
     Example:
     > execute_select('SELECT %(title)s; FROM shows', variables={'title': 'Codecool'})
     statement: SELECT statement

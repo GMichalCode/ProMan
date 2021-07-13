@@ -1,3 +1,4 @@
+  
 import { dataHandler } from "./dataHandler.js";
 import { htmlFactory, htmlTemplates } from "./htmlFactory.js";
 import { domManager } from "./domManager.js";
@@ -16,4 +17,3 @@ export let cardsManager = {
 
 function deleteButtonHandler(clickEvent) {
 }
-
