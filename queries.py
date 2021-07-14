@@ -46,8 +46,7 @@ def get_cards_for_board(board_id):
         SELECT * FROM cards
         WHERE cards.board_id = %(board_id)s
         ;
-        """, {"board_id": board_id}, False)
-
+        """, {"board_id": board_id})
     return matching_cards
 
 

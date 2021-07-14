@@ -40,7 +40,6 @@ async function apiGet(url) {
 }
 
 async function apiPost(url, payload) {
-
 }
 
 async function apiDelete(url) {
