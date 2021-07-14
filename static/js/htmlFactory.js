@@ -18,11 +18,15 @@ export function htmlFactory(template) {
 function boardBuilder(board) {
     return `<div class="board-container">
                 <div class="board" data-board-id=${board.id}>${board.title}</div>
+<!--                <ul id="sortable">-->
+<!--                    <li class="ui-state-default">Item 1</li>-->
+<!--                    <li class="ui-state-default">Item 2</li>-->
+<!--                    <li class="ui-state-default">Item 3</li>-->
+<!--                </ul>-->
                 <button class="toggle-board-button" data-board-id="${board.id}">Show Cards</button>
             </div>`;
 }
 
 function cardBuilder(card) {
-    return `<div class="card" data-card-id="${card.id}">${card.title}</div>`;
+    return `<div class="card " data-card-id="${card.id}">${card.title}</div>`;
 }
-

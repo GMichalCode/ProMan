@@ -4,7 +4,7 @@ export let dataHandler = {
     },
     getBoard: async function(boardId) {
         // the board is retrieved and then the callback function is called with the board
-        return await apiGet('/get-boards/${boardId}`')
+        return await apiGet(`/get-boards/${boardId}`)
     },
     getStatuses: async function () {
         // the statuses are retrieved and then the callback function is called with the statuses
@@ -12,21 +12,23 @@ export let dataHandler = {
     },
     getStatus: async function (statusId) {
         // the status is retrieved and then the callback function is called with the status
-        return await apiGet('/get-statuses/${statusId}`')
+        return await apiGet(`/get-statuses/${statusId}`)
     },
     getCardsByBoardId: async function (boardId) {
-        return await apiGet('/get-board-cards/${boardId}`')
+        return await apiGet(`/get-board-cards/${boardId}`)
     },
     getCard: async function (cardId) {
         // the card is retrieved and then the callback function is called with the card
-        return await apiGet('/get-cards/${cardId}`')
+        return await apiGet(`/get-cards/${cardId}`)
     },
     createNewBoard: async function (boardTitle) {
         // creates new board, saves it and calls the callback function with its data
-        await apiPost("/add-board", boardTitle)
+        await apiPost("/add-board", {'boardTitle': boardTitle})
     },
     createNewCard: async function (cardTitle, boardId, statusId) {
         // creates new card, saves it and calls the callback function with its data
+        let newCardData = {"cardTitle": cardTitle, "boardId": boardId, "statusId": statusId}
+        await apiPost("/add-card", newCardData)
     }
 };
 
@@ -40,7 +42,16 @@ async function apiGet(url) {
 }
 
 async function apiPost(url, payload) {
-
+    let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    if (response.status === 200) {
+        return response.json()
+    }
 }
 
 async function apiDelete(url) {
