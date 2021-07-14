@@ -70,6 +70,15 @@ def get_statuses():
     )
 
 
+def get_connetcions(boardId):
+    return data_manager.execute_select(
+        """
+        SELECT board_id FROM connections 
+        WHERE s.board_id = %(boardId)s
+        """, {"boardId": boardId}
+
+    )
+
 def get_status(status_id):
     return data_manager.execute_select(
         """
