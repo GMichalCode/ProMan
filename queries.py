@@ -80,9 +80,21 @@ def get_status(status_id):
 
 
 def add_board(board_title):
+    if check_if_board_title_exist(board_title):
+        raise Exception
+
     data_manager.execute_insert(
         """
         INSERT INTO boards (title)
         VALUES (%(board_title)s);
-        """
-        , {"board_title": board_title})
+        """, {"board_title": board_title})
+
+
+def check_if_board_title_exist(board_title):
+    board_id = data_manager.execute_select("""
+    SELECT id FROM boards
+    WHERE title = (%(board_title)s)
+    """, {"board_title": board_title})
+    if board_id:
+        return True
+    return False

@@ -1,9 +1,10 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, flash
 
 import queries
 from util import json_response
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/ProMan'
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -58,7 +59,6 @@ def get_cards_for_board(board_id: int):
     All cards that belongs to a board
     :param board_id: id of the parent board
     """
-    "something to commit in case of adding new branches"
     return queries.get_cards_for_board(board_id)
 
 
@@ -69,14 +69,16 @@ def get_card(card_id: int):
     All cards that belongs to a board
     :param board_id: id of the parent board
     """
-    "something to commit in case of adding new branches"
     return queries.get_card(card_id)
 
 
 @app.route("/add-board")
 @json_response
 def add_board(board_title):
-    queries.add_board(board_title)
+    try:
+        queries.add_board(board_title)
+    except:
+        flash('Board with this name already exist!')
 
 
 def main():
