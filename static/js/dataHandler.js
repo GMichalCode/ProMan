@@ -55,7 +55,21 @@ async function apiPost(url, payload) {
 }
 
 async function apiDelete(url) {
+    let response = await fetch(url, {
+        method: 'DELETE'
+    })
+    if (response.status === 200) {
+        let data = response.json()
+        return data
+    }
 }
 
 async function apiPut(url) {
+    let response = await fetch(url, {
+        method: 'PUT',
+    })
+    if (response.status === 200) {
+        let data = response.json()
+        return data
+    }
 }

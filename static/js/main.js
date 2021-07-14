@@ -13,4 +13,4 @@ function initCreateBoardButton() {
 }
 
 init();
-initCreateBoardButton();
+// initCreateBoardButton();
