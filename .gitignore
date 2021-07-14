@@ -139,3 +139,5 @@ dmypy.json
 .idea/ProMan.iml
 .idea/sqldialects.xml
 .idea/vcs.xml
+/.idea/
+.idea
