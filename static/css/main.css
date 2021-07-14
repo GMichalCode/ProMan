@@ -132,3 +132,15 @@ section.board {
 .card-title {
     padding-right: 16px;
 }
+
+.ul {
+    background-color: #590000;
+}
+
+.li {
+    background-color: #085900;
+}
+
+.span {
+    background-color: #594300;
+}

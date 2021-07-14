@@ -14,7 +14,8 @@ def index():
     """
     if request.method == "POST":
         if request.form['board-title']:
-            add_board(request.form['board-title'])
+            # add_board(request.form['board-title'])
+            pass
 
     return render_template('index.html')
 
@@ -72,13 +73,21 @@ def get_card(card_id: int):
     return queries.get_card(card_id)
 
 
-@app.route("/add-board")
+@app.route("/add-board", methods=['POST'])
 @json_response
-def add_board(board_title):
+def add_board():
     try:
-        queries.add_board(board_title)
+        # todo: query zapisujące dane do BD
+        print(request.json)
+        print(request.json['boardTitle'])
     except:
-        flash('Board with this name already exist!')
+        flash('Board with that name already exists!')
+
+
+@app.route("/add-card")
+@json_response
+def add_card():
+    pass
 
 
 def main():
