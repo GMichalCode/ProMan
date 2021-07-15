@@ -23,7 +23,7 @@ function boardBuilder(board) {
                 <section class="board" data-board-id="${board.id}" id="board${board.id}">
                     <div class="board-header">
 <!--                        <span class="board-title">${board.title}</span>-->
-                        <input class="board-title" id="board-title-${board.id}" value="${board.title}">
+                        <input class="board-title" maxlength="40" id="board-title-${board.id}" value="${board.title}">
                         <button class="board-add" data-board-id="${board.id}">Add Card</button>
 <!--                        <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>-->
                         <button class="toggle-board-button" data-board-id="${board.id}">Show Cards</button>
