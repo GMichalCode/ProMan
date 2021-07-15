@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, flash
+from flask import Flask, render_template, url_for, request
 
 import queries
 from util import json_response
@@ -12,11 +12,6 @@ def index():
     """
     This is a one-pager which shows all the boards and cards
     """
-    if request.method == "POST":
-        if request.form['board-title']:
-            # add_board(request.form['board-title'])
-            pass
-
     return render_template('index.html')
 
 
@@ -42,7 +37,6 @@ def get_statuses():
     All the boards
     """
     return queries.get_statuses()
-
 
 
 @app.route("/get-connections/<int:board_id>")
@@ -83,23 +77,27 @@ def get_card(card_id: int):
     return queries.get_card(card_id)
 
 
+@app.route("/get-if-board-title-exists")
+@json_response
+def get_if_board_title_exists(board_title: str):
+    """
+    All cards that belongs to a board
+    :param board_id: id of the parent board
+    """
+    return queries.check_if_board_title_exist(board_title)
+
+
 @app.route("/add-board", methods=['POST'])
 @json_response
 def add_board():
-    try:
-        # todo: query zapisujące dane do BD
-        print(request.json)
-        print(request.json['boardTitle'])
-    except:
-        flash('Board with that name already exists!')
+    board_title = request.json['boardTitle']
+    queries.add_board(board_title)
 
 
 @app.route("/add-card")
 @json_response
 def add_card():
     pass
-
-
 
 
 def main():

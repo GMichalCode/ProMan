@@ -70,14 +70,15 @@ def get_statuses():
     )
 
 
-def get_connetcions(boardId):
+def get_connections(boardId):
     return data_manager.execute_select(
         """
-        SELECT board_id FROM connections 
-        WHERE s.board_id = %(boardId)s
+        SELECT board_id FROM connections c 
+        WHERE c.board_id = %(boardId)s
         """, {"boardId": boardId}
 
     )
+
 
 def get_status(status_id):
     return data_manager.execute_select(
@@ -89,14 +90,12 @@ def get_status(status_id):
 
 
 def add_board(board_title):
-    if check_if_board_title_exist(board_title):
-        raise Exception
-
-    data_manager.execute_insert(
-        """
-        INSERT INTO boards (title)
-        VALUES (%(board_title)s);
-        """, {"board_title": board_title})
+    if not check_if_board_title_exist(board_title):
+        data_manager.execute_insert(
+            """
+            INSERT INTO boards (title)
+            VALUES (%(board_title)s);
+            """, {"board_title": board_title})
 
 
 def check_if_board_title_exist(board_title):
