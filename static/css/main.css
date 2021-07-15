@@ -144,3 +144,7 @@ section.board {
 .span {
     background-color: #594300;
 }
+
+.board-title {
+    border: 0 transparent;
+}
