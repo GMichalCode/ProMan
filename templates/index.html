@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ProMan</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/solid.css" integrity="sha384-rdyFrfAIC05c5ph7BKz3l5NG5yEottvO/DQ0dCrwD8gzeQDjYBHNr1ucUpQuljos" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
+
+
+
+
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
         <link rel="icon" type="image/png" sizes="32x32"
               href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
@@ -15,40 +30,27 @@
               href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-        <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!--{#    <script>#}-->
-<!--{#        $(function () {#}-->
-<!--{#            $("#sortable").sortable({#}-->
-<!--{#                revert: true#}-->
-<!--{#            });#}-->
-<!--{#            $("#draggable").draggable({#}-->
-<!--{#                connectToSortable: "#sortable",#}-->
-<!--{#                helper: "clone",#}-->
-<!--{#                revert: "invalid"#}-->
-<!--{#            });#}-->
-<!--{#            $("ul, li").disableSelection();#}-->
-<!--{#        });#}-->
-<!--{#    </script>#}-->
+
+{#    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>#}
+{#    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>#}
+
 </head>
 <body>
 <div id="root"></div>
-<input id="board-name-input" type="text" name="board-title" placeholder="insert board title" required>
-<input id="board-name-submit" type="submit" value="Add New Board">
 
-{#<ul>#}
-{#    <li id="draggable" class="ui-state-highlight">Drag me down</li>#}
-{#</ul>#}
-{##}
-{#<ul id="sortable">#}
-{#    <li class="ui-state-default">Item 1</li>#}
-{#    <li class="ui-state-default">Item 2</li>#}
-{#    <li class="ui-state-default">Item 3</li>#}
-{#    <li class="ui-state-default">Item 4</li>#}
-{#    <li class="ui-state-default">Item 5</li>#}
-{#</ul>#}
 
+
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+<script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </body>
 </html>
