@@ -1,7 +1,8 @@
-import {dataHandler} from "./dataHandler.js";
-import {htmlFactory, htmlTemplates} from "./htmlFactory.js";
-import {domManager} from "./domManager.js";
-import {cardsManager} from "./cardsManager.js";
+import { dataHandler } from "./dataHandler.js";
+import { htmlFactory, htmlTemplates } from "./htmlFactory.js";
+import { domManager } from "./domManager.js";
+import { cardsManager } from "./cardsManager.js";
+import { columnsManager } from "./columnsManager.js";
 
 export let boardsManager = {
     loadBoards: async function () {
@@ -9,18 +10,15 @@ export let boardsManager = {
         for (let board of boards) {
             const boardBuilder = htmlFactory(htmlTemplates.board);
             const content = boardBuilder(board)
-            domManager.addChild("#root", content)
+            domManager.addChild('#root', content)
             domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
         }
     },
-    createBoards: async function () {
-        let input = document.getElementById('board-name-input').value
-        dataHandler.createNewBoard(input)
-    }
 }
-
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId
-    cardsManager.loadCards(boardId)
+    columnsManager.loadColumns(boardId, function (){
+            cardsManager.loadCards(boardId)})
+
 }

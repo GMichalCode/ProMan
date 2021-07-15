@@ -44,6 +44,16 @@ def get_statuses():
     return queries.get_statuses()
 
 
+
+@app.route("/get-connections/<int:board_id>")
+@json_response
+def get_connections(board_id):
+    """
+    All the boards
+    """
+    return queries.get_connections(board_id)
+
+
 @app.route("/get-statuses/<int:status_id>")
 @json_response
 def get_status(status_id):
@@ -88,6 +98,8 @@ def add_board():
 @json_response
 def add_card():
     pass
+
+
 
 
 def main():
