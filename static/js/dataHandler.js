@@ -2,16 +2,17 @@ export let dataHandler = {
     getBoards: async function () {
         return await apiGet('/get-boards')
     },
-    getBoard: async function(boardId) {
+    getBoard: async function (boardId) {
         // the board is retrieved and then the callback function is called with the board
         return await apiGet(`/get-boards/${boardId}`)
     },
-
+    getIfBoardTitleExists: async function (boardId) {
+        return await apiGet(`/get-if-board-title-exists`)
+    },
     getConnections: async function (boardId) {
         // the statuses are retrieved and then the callback function is called with the statuses
         return await apiGet('/get-connections/${boardId}')
     },
-
     getStatuses: async function () {
         // the statuses are retrieved and then the callback function is called with the statuses
         return await apiGet('/get-statuses')
@@ -35,6 +36,11 @@ export let dataHandler = {
         // creates new card, saves it and calls the callback function with its data
         let newCardData = {"cardTitle": cardTitle, "boardId": boardId, "statusId": statusId}
         await apiPost("/add-card", newCardData)
+    },
+    updateBoardTitle: async function (boardId, newBoardTitle) {
+        //updates board title in db
+        let newBoardTitleToUpdate = {'boardID': boardId, 'newBoardTitle': newBoardTitle}
+        await apiPut("/update-board-title", newBoardTitleToUpdate)
     }
 };
 
@@ -70,9 +76,13 @@ async function apiDelete(url) {
     }
 }
 
-async function apiPut(url) {
+async function apiPut(url, payload) {
     let response = await fetch(url, {
         method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
     })
     if (response.status === 200) {
         let data = response.json()

@@ -5,12 +5,12 @@ function init() {
 }
 
 function initCreateBoardButton() {
-    let button = document.getElementById('board-name-submit')
-    button.addEventListener('click', function () {
+    let submitBoardTitleButton = document.getElementById('board-name-submit')
+    submitBoardTitleButton.addEventListener('click', function () {
         boardsManager.createBoards()
         //todo: odświeżenie widoku na stronie, najlepiej dodać DOMem te dane mimo, że ich jeszcze nie ma w DB
     })
 }
 
 init();
-// initCreateBoardButton();
+initCreateBoardButton();
