@@ -100,6 +100,14 @@ def add_card():
     pass
 
 
+@app.route("/update-board-title", methods=['PUT'])
+@json_response
+def update_board_title():
+    board_to_update_id = request.json['boardID']
+    new_board_title = request.json['newBoardTitle']
+    queries.update_board_title(board_to_update_id, new_board_title)
+
+
 def main():
     app.run(debug=True)
 

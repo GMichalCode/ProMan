@@ -12,11 +12,12 @@ export let boardsManager = {
             const content = boardBuilder(board)
             domManager.addChild('#root', content);
             domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
+            domManager.addEventListener(`#board-title-${board.id}`, "change", changeBoardTitle);
         }
     },
     createBoards: async function () {
         let input = document.getElementById('board-name-input').value;
-        //todo: check if boadr with input name already exists
+        //todo: check if board with input name already exists
         dataHandler.createNewBoard(input);
         let newBoard = {'id': null, 'title': input, 'is_deleted': false};
         const boardBuilder = htmlFactory(htmlTemplates.board);
@@ -30,4 +31,11 @@ function showHideButtonHandler(clickEvent) {
     columnsManager.loadColumns(boardId, function () {
         cardsManager.loadCards(boardId);
     })
+}
+
+function changeBoardTitle(clickEvent) {
+    let target = clickEvent.target;
+    let boardToUpdateID = target.id.slice(12, 16);
+    let newBoardTitle = target.value;
+    dataHandler.updateBoardTitle(boardToUpdateID, newBoardTitle)
 }
