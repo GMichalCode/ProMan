@@ -12,7 +12,7 @@
 
 body {
     min-width: 620px;
-    background: #ddd url(http://cdn.backgroundhost.com/backgrounds/subtlepatterns/diagonal-noise.png);
+    background: #ffffff url(http://cdn.backgroundhost.com/backgrounds/subtlepatterns/diagonal-noise.png);
     font-family: sans-serif;
 }
 
@@ -147,4 +147,15 @@ section.board {
 
 .board-title {
     border: 0 transparent;
+    background: transparent;
+}
+
+.status-title {
+    border: 0 transparent;
+    background: transparent;
+}
+
+.card-title {
+    border: 0 transparent;
+    background: #ffffff90;
 }

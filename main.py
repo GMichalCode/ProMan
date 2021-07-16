@@ -39,13 +39,13 @@ def get_statuses():
     return queries.get_statuses()
 
 
-@app.route("/get-connections/<int:board_id>")
-@json_response
-def get_connections(board_id):
-    """
-    All the boards
-    """
-    return queries.get_connections(board_id)
+# @app.route("/get-connections/<int:board_id>")
+# @json_response
+# def get_connections(board_id):
+#     """
+#     All the boards
+#     """
+#     return queries.get_connections(board_id)
 
 
 @app.route("/get-statuses/<int:status_id>")
@@ -55,6 +55,12 @@ def get_status(status_id):
     All the boards
     """
     return queries.get_status(status_id)
+
+
+@app.route("/get-board-statuses/<int:board_id>")
+@json_response
+def get_statuses_for_board(board_id: int):
+    return queries.get_board_statuses(board_id)
 
 
 @app.route("/get-board-cards/<int:board_id>")
@@ -106,6 +112,14 @@ def update_board_title():
     board_to_update_id = request.json['boardID']
     new_board_title = request.json['newBoardTitle']
     queries.update_board_title(board_to_update_id, new_board_title)
+
+
+@app.route("/update-column-title", methods=['PUT'])
+@json_response
+def update_column_title():
+    column_to_update_id = request.json['columnID']
+    new_column_title = request.json['newColumnTitle']
+    queries.update_column_title(column_to_update_id, new_column_title)
 
 
 def main():

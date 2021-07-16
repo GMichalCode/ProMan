@@ -21,6 +21,9 @@ export let dataHandler = {
         // the status is retrieved and then the callback function is called with the status
         return await apiGet(`/get-statuses/${statusId}`)
     },
+    getStatusesByBoardId: async function (boardId) {
+        return await apiGet(`/get-board-statuses/${boardId}`)
+    },
     getCardsByBoardId: async function (boardId) {
         return await apiGet(`/get-board-cards/${boardId}`)
     },
@@ -41,6 +44,10 @@ export let dataHandler = {
         //updates board title in db
         let newBoardTitleToUpdate = {'boardID': boardId, 'newBoardTitle': newBoardTitle}
         await apiPut("/update-board-title", newBoardTitleToUpdate)
+    },
+    updateColumnTitle: async function (columnToUpdateID, newColumnTitle) {
+        let newColumnTitleToUpdate = {'columnID': columnToUpdateID, 'newColumnTitle': newColumnTitle}
+        await apiPut("/update-column-title", newColumnTitleToUpdate)
     }
 };
 
