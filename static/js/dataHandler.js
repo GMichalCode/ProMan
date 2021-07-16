@@ -1,6 +1,6 @@
 export let dataHandler = {
     getBoards: async function () {
-        return await apiGet(`/get-boards`)
+        return await apiGet('/get-boards')
     },
     getBoard: async function (boardId) {
         // the board is retrieved and then the callback function is called with the board
@@ -9,13 +9,20 @@ export let dataHandler = {
     getIfBoardTitleExists: async function (boardId) {
         return await apiGet(`/get-if-board-title-exists`)
     },
-
-
-    getStatuses: async function (boardId) {
-        return await apiGet(`/get-statuses/${boardId}`)
+    getConnections: async function (boardId) {
+        // the statuses are retrieved and then the callback function is called with the statuses
+        return await apiGet('/get-connections/${boardId}')
     },
-    getStatusesByBoardId: async function (boardId) {
-        return await apiGet(`/get-board-statuses/${boardId}`)
+    getColumns: async function () {
+        // the statuses are retrieved and then the callback function is called with the statuses
+        return await apiGet('/get-columns')
+    },
+    getColumn: async function (columnId) {
+        // the status is retrieved and then the callback function is called with the status
+        return await apiGet(`/get-columns/${columnId}`)
+    },
+    getColumnsByBoardId: async function (boardId) {
+        return await apiGet(`/get-board-columns/${boardId}`)
     },
     getCardsByBoardId: async function (boardId) {
         return await apiGet(`/get-board-cards/${boardId}`)
@@ -28,9 +35,9 @@ export let dataHandler = {
         // creates new board, saves it and calls the callback function with its data
         await apiPost("/add-board", {'boardTitle': boardTitle})
     },
-    createNewCard: async function (cardTitle, boardId, statusId) {
+    createNewCard: async function (cardTitle, boardId, columnId) {
         // creates new card, saves it and calls the callback function with its data
-        let newCardData = {"cardTitle": cardTitle, "boardId": boardId, "statusId": statusId}
+        let newCardData = {"cardTitle": cardTitle, "boardId": boardId, "columnId": columnId}
         await apiPost("/add-card", newCardData)
     },
     updateBoardTitle: async function (boardId, newBoardTitle) {

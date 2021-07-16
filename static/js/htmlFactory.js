@@ -1,7 +1,7 @@
 export const htmlTemplates = {
     board: 1,
     card: 2,
-    status: 3
+    column: 3
 }
 
 export function htmlFactory(template) {
@@ -10,11 +10,13 @@ export function htmlFactory(template) {
             return boardBuilder
         case htmlTemplates.card:
             return cardBuilder
-        case htmlTemplates.status:
+        case htmlTemplates.column:
             return columnBuilder
         default:
             console.error("Undefined template: " + template)
-            return () => { return "" }
+            return () => {
+                return ""
+            }
     }
 }
 
@@ -41,10 +43,10 @@ function cardBuilder(card) {
             </div>`;
 }
 
-function columnBuilder(boardId, status) {
-    return `<div class="board-column" id="column${status.id}">
-<!--                    <div class="board-column-title">${status.title}</div>-->
-                        <input class="status-title" maxlength="40" id="status-title-${status.id}" value="${status.title}">
-                    <div class="board${boardId}-column-content" data-column-id="${status.id}"></div>
+function columnBuilder(boardId, column) {
+    return `<div class="board-column" id="column${column.id}">
+<!--                    <div class="board-column-title">${column.title}</div>-->
+                        <input class="column-title" maxlength="40" id="column-title-${column.id}" value="${column.title}">
+                    <div class="board${boardId}-column-content" data-column-id="${column.id}"></div>
             </div>`
 }
