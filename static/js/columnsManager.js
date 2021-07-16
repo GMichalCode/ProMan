@@ -4,12 +4,12 @@ import {domManager} from "./domManager.js";
 
 export let columnsManager = {
     loadColumns: async function (boardId, callback) {
-        const statuses = await dataHandler.getStatuses();
-        for (let status of statuses) {
-            const columnBuilder = htmlFactory(htmlTemplates.status);
-            const content = columnBuilder(boardId, status)
+        const columns = await dataHandler.getColumns();
+        for (let column of columns) {
+            const columnBuilder = htmlFactory(htmlTemplates.column);
+            const content = columnBuilder(boardId, column)
             domManager.addChild('#board' + boardId, content)
-            domManager.addEventListener(`#status-title-${status.id}`, "change", changeColumnTitle);
+            domManager.addEventListener(`#column-title-${column.id}`, "change", changeColumnTitle);
         }
         callback();
     },

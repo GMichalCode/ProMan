@@ -13,16 +13,16 @@ export let dataHandler = {
         // the statuses are retrieved and then the callback function is called with the statuses
         return await apiGet('/get-connections/${boardId}')
     },
-    getStatuses: async function () {
+    getColumns: async function () {
         // the statuses are retrieved and then the callback function is called with the statuses
-        return await apiGet('/get-statuses')
+        return await apiGet('/get-columns')
     },
-    getStatus: async function (statusId) {
+    getColumn: async function (columnId) {
         // the status is retrieved and then the callback function is called with the status
-        return await apiGet(`/get-statuses/${statusId}`)
+        return await apiGet(`/get-columns/${columnId}`)
     },
-    getStatusesByBoardId: async function (boardId) {
-        return await apiGet(`/get-board-statuses/${boardId}`)
+    getColumnsByBoardId: async function (boardId) {
+        return await apiGet(`/get-board-columns/${boardId}`)
     },
     getCardsByBoardId: async function (boardId) {
         return await apiGet(`/get-board-cards/${boardId}`)
@@ -35,9 +35,9 @@ export let dataHandler = {
         // creates new board, saves it and calls the callback function with its data
         await apiPost("/add-board", {'boardTitle': boardTitle})
     },
-    createNewCard: async function (cardTitle, boardId, statusId) {
+    createNewCard: async function (cardTitle, boardId, columnId) {
         // creates new card, saves it and calls the callback function with its data
-        let newCardData = {"cardTitle": cardTitle, "boardId": boardId, "statusId": statusId}
+        let newCardData = {"cardTitle": cardTitle, "boardId": boardId, "columnId": columnId}
         await apiPost("/add-card", newCardData)
     },
     updateBoardTitle: async function (boardId, newBoardTitle) {
