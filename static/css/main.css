@@ -73,6 +73,7 @@ section.board {
 .board-columns {
     display: flex;
     flex-wrap: nowrap;
+    /*justify-content: space-between;*/
 }
 
 .board-column {
