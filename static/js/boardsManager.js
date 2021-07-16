@@ -28,6 +28,7 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
+
     columnsManager.loadColumns(boardId, function () {
         cardsManager.loadCards(boardId);
     })
