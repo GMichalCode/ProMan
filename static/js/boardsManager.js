@@ -11,13 +11,13 @@ export let boardsManager = {
             const boardBuilder = htmlFactory(htmlTemplates.board);
             const content = boardBuilder(board)
             domManager.addChild('#root', content);
-            domManager.addEventListener(`.board-toggle[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
+            domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
             domManager.addEventListener(`#board-title-${board.id}`, "change", changeBoardTitle);
         }
     },
     createBoards: async function () {
         let input = document.getElementById('board-name-input').value;
-        //todo: check if board with input name already exists
+        //todo: check here if board with input name already exists
         dataHandler.createNewBoard(input);
         let newBoard = {'id': null, 'title': input, 'is_deleted': false};
         const boardBuilder = htmlFactory(htmlTemplates.board);
