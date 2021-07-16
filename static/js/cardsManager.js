@@ -13,7 +13,7 @@ export let cardsManager = {
             const content = cardBuilder(card)
             domManager.addChild(`.board${boardId}-column-content[data-column-id="${card.column_id}"]`, content);
             // domManager.addChild(`.board[data-board-id="${boardId}"]`, content)
-            domManager.addEventListener(`.card[data-card-id="${card.id}"]`, "click", deleteButtonHandler)
+            // domManager.addEventListener(`.card[data-card-id="${card.id}"]`, "click", deleteButtonHandler)
         }
     },
 }
