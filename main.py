@@ -30,37 +30,16 @@ def get_board(board_id):
     return queries.get_board(board_id)
 
 
-@app.route("/get-columns")
+@app.route("/get-columns/<int:board_id>")
 @json_response
-def get_columns():
-    """
-    All the boards
-    """
-    return queries.get_columns()
-
-
-# @app.route("/get-connections/<int:board_id>")
-# @json_response
-# def get_connections(board_id):
-#     """
-#     All the boards
-#     """
-#     return queries.get_connections(board_id)
+def get_columns(board_id):
+    return queries.get_columns(board_id)
 
 
 @app.route("/get-column/<int:column_id>")
 @json_response
 def get_column(column_id):
-    """
-    All the boards
-    """
     return queries.get_column(column_id)
-
-
-@app.route("/get-board-columns/<int:board_id>")
-@json_response
-def get_columns_for_board(board_id: int):
-    return queries.get_board_columns(board_id)
 
 
 @app.route("/get-board-cards/<int:board_id>")

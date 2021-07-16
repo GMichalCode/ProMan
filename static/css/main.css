@@ -39,6 +39,7 @@ button {
 .board-container {
     max-width: 960px;
     margin: 0 auto;
+
 }
 
 section.board {
@@ -72,15 +73,21 @@ section.board {
 .board-columns {
     display: flex;
     flex-wrap: nowrap;
+    /*justify-content: space-between;*/
 }
 
 .board-column {
     padding: 10px;
     flex: 1;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+
 }
 
 .board-column-content {
     min-height: 49px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .board-column-content:empty {

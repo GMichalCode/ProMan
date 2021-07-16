@@ -9,6 +9,7 @@ export let columnsManager = {
             const columnBuilder = htmlFactory(htmlTemplates.column);
             const content = columnBuilder(boardId, column)
             domManager.addChild('#board' + boardId, content)
+            //domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content)
             domManager.addEventListener(`#column-title-${column.id}`, "change", changeColumnTitle);
         }
         callback();
