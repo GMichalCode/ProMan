@@ -41,6 +41,9 @@ export let dataHandler = {
     updateColumnTitle: async function (columnToUpdateID, newColumnTitle) {
         let newColumnTitleToUpdate = {'columnID': columnToUpdateID, 'newColumnTitle': newColumnTitle}
         await apiPut(`/update-column-title`, newColumnTitleToUpdate)
+    },
+    signIn: async function (formData) {
+        return await apiPost('/login', Object.fromEntries(formData))
     }
 };
 
@@ -89,3 +92,4 @@ async function apiPut(url, payload) {
         return data
     }
 }
+

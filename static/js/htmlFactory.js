@@ -1,7 +1,8 @@
 export const htmlTemplates = {
     board: 1,
     card: 2,
-    column: 3
+    column: 3,
+    signIn: 4,
 }
 
 export function htmlFactory(template) {
@@ -12,6 +13,8 @@ export function htmlFactory(template) {
             return cardBuilder
         case htmlTemplates.column:
             return columnBuilder
+        case htmlTemplates.signIn:
+            return signInBuilder
         default:
             console.error("Undefined template: " + template)
             return () => {
@@ -45,4 +48,29 @@ function columnBuilder(boardId, column) {
                     <div class="board-column-title">${column.title}</div>
                     <div class="board${boardId}-column-content" data-column-id="${column.id}"></div>
             </div>`
+}
+
+function signInBuilder () {
+    return `<div id="signInModal" class="modal">
+    <div class="modal-content">
+        <span align="right" class="close">&times;</span>
+        <div align="center">
+              <div align="center" class="border">
+                 <div class="header">
+                    <h1 class="word">Sign In Page</h1>
+                 </div><br>
+                    <h2 class="word">Please fill the form:</h2>
+                 </div>
+                <h2 class="word">
+                    <form id="signInForm">
+                      <div class="msg"></div><br>
+                        <input id="email" name="email" type="text" placeholder="Enter Your Email" class="textbox"/><br><br>
+                        <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/><br><br>
+                        <input id="login" type="submit" class="btn" value="Sign In"><br>
+                    </form>
+                </h2>
+              </div>
+            </div>
+      </div>
+    </div>`
 }

@@ -1,5 +1,4 @@
 from flask import Flask, render_template, url_for, request
-
 import queries
 from util import json_response
 
@@ -99,6 +98,12 @@ def update_column_title():
     column_to_update_id = request.json['columnID']
     new_column_title = request.json['newColumnTitle']
     queries.update_column_title(column_to_update_id, new_column_title)
+
+
+@app.route("/login", methods=['POST', 'GET'])
+@json_response
+def login():
+    return {'message': "Incorrect email/password", 'status': 404}
 
 
 def main():
