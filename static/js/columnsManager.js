@@ -4,7 +4,7 @@ import {domManager} from "./domManager.js";
 
 export let columnsManager = {
     loadColumns: async function (boardId, callback) {
-        const columns = await dataHandler.getColumns();
+        const columns = await dataHandler.getColumnsByBoardId(boardId);
         for (let column of columns) {
             const columnBuilder = htmlFactory(htmlTemplates.column);
             const content = columnBuilder(boardId, column)

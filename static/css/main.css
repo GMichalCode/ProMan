@@ -150,6 +150,33 @@ section.board {
     background: transparent;
 }
 
+.column-title {
+    border: 0 transparent;
+    background: transparent;
+}
+
+.card-title {
+    border: 0 transparent;
+    background: #ffffff90;
+}
+
+.ul {
+    background-color: #590000;
+}
+
+.li {
+    background-color: #085900;
+}
+
+.span {
+    background-color: #594300;
+}
+
+.board-title {
+    border: 0 transparent;
+    background: transparent;
+}
+
 .status-title {
     border: 0 transparent;
     background: transparent;

@@ -92,11 +92,11 @@ def get_column(column_id):
 
 
 def get_board_columns(board_id):
-    data_manager.execute_select(
+    return data_manager.execute_select(
         """
         SELECT * FROM columns
-        WHERE board_id = %(board_id)s AND is_deleted = FALSE
-        """, {"boardId": board_id}
+        WHERE board_id = (%(board_id)s) AND is_deleted = FALSE
+        """, {'board_id': board_id}
     )
 
 
