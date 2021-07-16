@@ -62,24 +62,14 @@ def get_card(card_id):
     return card
 
 
-def get_columns():
+def get_columns(board_id):
     return data_manager.execute_select(
         """
-        SELECT * FROM columns
-        WHERE is_deleted = FALSE
+        SELECT * FROM columns c
+        WHERE c.board_id = %(board_id)s AND is_deleted = FALSE
         ;
-        """
+        """, {"board_id": board_id}
     )
-
-
-# def get_connections(boardId):
-#     return data_manager.execute_select(
-#         """
-#         SELECT board_id FROM connections c
-#         WHERE c.board_id = %(boardId)s
-#         """, {"boardId": boardId}
-#
-#     )
 
 
 def get_column(column_id):

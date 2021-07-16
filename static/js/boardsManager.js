@@ -15,15 +15,15 @@ export let boardsManager = {
             domManager.addEventListener(`#board-title-${board.id}`, "change", changeBoardTitle);
         }
     },
-    createBoards: async function () {
-        let input = document.getElementById('board-name-input').value;
-        //todo: check if board with input name already exists
-        dataHandler.createNewBoard(input);
-        let newBoard = {'id': null, 'title': input, 'is_deleted': false};
-        const boardBuilder = htmlFactory(htmlTemplates.board);
-        const content = boardBuilder(newBoard);
-        domManager.addChild('#root', content);
-    }
+    // createBoards: async function () {
+    //     let input = document.getElementById('board-name-input').value;
+    //     //todo: check if board with input name already exists
+    //     dataHandler.createNewBoard(input);
+    //     let newBoard = {'id': null, 'title': input, 'is_deleted': false};
+    //     const boardBuilder = htmlFactory(htmlTemplates.board);
+    //     const content = boardBuilder(newBoard);
+    //     domManager.addChild('#root', content);
+    // }
 }
 
 function showHideButtonHandler(clickEvent) {
