@@ -62,14 +62,13 @@ def get_card(card_id):
     return card
 
 
-def get_statuses():
+def get_statuses(board_id):
     return data_manager.execute_select(
         """
-        SELECT * FROM statuses
-        WHERE is_deleted = FALSE
+        SELECT * FROM statuses s
+        WHERE s.board_id = %(board_id)s AND s.is_deleted = FALSE
         ;
-        """
-    )
+        """, {"board_id": board_id})
 
 
 # def get_connections(boardId):
@@ -78,8 +77,6 @@ def get_statuses():
 #         SELECT board_id FROM connections c
 #         WHERE c.board_id = %(boardId)s
 #         """, {"boardId": boardId}
-#
-#     )
 
 
 def get_status(status_id):
@@ -91,6 +88,7 @@ def get_status(status_id):
         """, {"status_id": status_id}, False)
 
 
+
 def get_board_statuses(board_id):
     data_manager.execute_select(
         """
@@ -98,6 +96,15 @@ def get_board_statuses(board_id):
         WHERE board_id = %(board_id)s AND is_deleted = FALSE
         """, {"boardId": board_id}
     )
+
+def get_statuses_for_board(board_id):
+    return data_manager.execute_select(
+        """
+        SELECT * FROM statuses s
+        WHERE s.board_id = %(board_id)s AND s.is_deleted = FALSE
+        ;
+        """, {"board_id": board_id})
+
 
 
 def add_board(board_title):
@@ -137,3 +144,4 @@ def update_column_title(column_to_update_id, new_column_title):
         WHERE id = (%(column_to_update_id)s)
         """, {'new_column_title': new_column_title, 'column_to_update_id': column_to_update_id}
     )
+
