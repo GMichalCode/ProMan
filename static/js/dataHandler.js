@@ -6,8 +6,8 @@ export let dataHandler = {
         // the board is retrieved and then the callback function is called with the board
         return await apiGet(`/get-boards/${boardId}`)
     },
-    getIfBoardTitleExists: async function (boardId) {
-        return await apiGet(`/get-if-board-title-exists`)
+    checkIfBoardTitleExists: async function (boardTitle) {
+        return await apiGet(`/check-if-board-title-exists`)
     },
     getConnections: async function (boardId) {
         // the statuses are retrieved and then the callback function is called with the statuses

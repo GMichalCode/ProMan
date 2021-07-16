@@ -101,7 +101,7 @@ def get_board_columns(board_id):
 
 
 def add_board(board_title):
-    if not check_if_board_title_exist(board_title):
+    if not check_if_board_title_exist1(board_title):
         data_manager.execute_insert(
             """
             INSERT INTO boards (title)
@@ -109,7 +109,7 @@ def add_board(board_title):
             """, {"board_title": board_title})
 
 
-def check_if_board_title_exist(board_title):
+def check_if_board_title_exist1(board_title):
     board_id = data_manager.execute_select("""
     SELECT id FROM boards
     WHERE title = (%(board_title)s)
@@ -117,6 +117,13 @@ def check_if_board_title_exist(board_title):
     if board_id:
         return True
     return False
+
+
+def check_if_board_title_exist(board_title):
+    return data_manager.execute_select("""
+        SELECT id FROM boards
+        WHERE title = (%(board_title)s)
+        """, {"board_title": board_title})
 
 
 def update_board_title(board_id, new_board_title):

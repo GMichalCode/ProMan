@@ -27,7 +27,7 @@ function boardBuilder(board) {
                         <input class="board-title" maxlength="40" id="board-title-${board.id}" value="${board.title}">
                         <button class="board-add" data-board-id="${board.id}">Add Card</button>
 <!--                        <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>-->
-                        <button class="toggle-board-button" data-board-id="${board.id}">Show More</button>
+                        <button class="toggle-board-button" data-board-id="${board.id}">Show</button>
                     </div>
                     <div class="board-column"" data-board-id = "$board.id}"></div>
                  </section>

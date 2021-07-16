@@ -39,15 +39,6 @@ def get_columns():
     return queries.get_columns()
 
 
-# @app.route("/get-connections/<int:board_id>")
-# @json_response
-# def get_connections(board_id):
-#     """
-#     All the boards
-#     """
-#     return queries.get_connections(board_id)
-
-
 @app.route("/get-column/<int:column_id>")
 @json_response
 def get_column(column_id):
@@ -83,14 +74,11 @@ def get_card(card_id: int):
     return queries.get_card(card_id)
 
 
-@app.route("/get-if-board-title-exists")
+@app.route("/check-if-board-title-exists")
 @json_response
-def get_if_board_title_exists(board_title: str):
-    """
-    All cards that belongs to a board
-    :param board_id: id of the parent board
-    """
-    return queries.check_if_board_title_exist(board_title)
+def check_if_board_title_exists(board_title: str):
+    answer = queries.check_if_board_title_exist(board_title)
+    return {'exist': answer}
 
 
 @app.route("/add-board", methods=['POST'])

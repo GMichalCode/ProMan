@@ -13,6 +13,10 @@ export let columnsManager = {
         }
         callback();
     },
+    hideColumns: async function (boardId, callback) {
+        const columns = await dataHandler.getColumnsByBoardId(boardId);
+
+    }
 }
 
 function changeColumnTitle(clickEvent) {
