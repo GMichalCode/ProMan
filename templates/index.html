@@ -37,6 +37,8 @@
 
 </head>
 <body>
+<input id="board-name-input" type="text" name="board-title" placeholder="insert board title" required>
+<input id="board-name-submit" type="submit" value="Add New Board">
 <div id="root"></div>
 
 
@@ -52,7 +54,6 @@
 
 
 <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-<input id="board-name-input" type="text" name="board-title" placeholder="insert board title" required>
-<input id="board-name-submit" type="submit" value="Add New Board">
+
 </body>
 </html>
