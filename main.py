@@ -1,5 +1,4 @@
 from flask import Flask, render_template, url_for, request
-
 import queries
 from util import json_response
 
@@ -30,28 +29,18 @@ def get_board(board_id):
     return queries.get_board(board_id)
 
 
-@app.route("/get-columns")
+@app.route("/get-columns/<int:board_id>")
 @json_response
-def get_columns():
-    """
-    All the boards
-    """
-    return queries.get_columns()
+
+def get_columns(board_id):
+    return queries.get_columns(board_id)
+
 
 
 @app.route("/get-column/<int:column_id>")
 @json_response
 def get_column(column_id):
-    """
-    All the boards
-    """
     return queries.get_column(column_id)
-
-
-@app.route("/get-board-columns/<int:board_id>")
-@json_response
-def get_columns_for_board(board_id: int):
-    return queries.get_board_columns(board_id)
 
 
 @app.route("/get-board-cards/<int:board_id>")
@@ -114,6 +103,12 @@ def update_column_title():
     queries.update_column_title(column_to_update_id, new_column_title)
 
     return """{"status": "success"}"""
+
+
+@app.route("/login", methods=['POST', 'GET'])
+@json_response
+def login():
+    return {'message': "Incorrect email/password", 'status': 404}
 
 
 def main():

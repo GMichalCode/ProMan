@@ -15,6 +15,7 @@ export let boardsManager = {
             domManager.addEventListener(`#board-title-${board.id}`, "change", changeBoardTitle);
         }
     },
+
     createBoards: async function () {
         let input = document.getElementById('board-name-input').value;
         //todo: check on front if board with input name already exists
