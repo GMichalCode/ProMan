@@ -17,7 +17,7 @@ export let boardsManager = {
     },
     createBoards: async function () {
         let input = document.getElementById('board-name-input').value;
-        //todo: check here if board with input name already exists
+        //todo: check on front if board with input name already exists
         dataHandler.checkIfBoardTitleExists(input)
         dataHandler.createNewBoard(input);
         let newBoard = {'id': null, 'title': input, 'is_deleted': false};
@@ -31,7 +31,6 @@ export let boardsManager = {
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
     if (clickEvent.target.innerHTML === "Hide") {
-        //todo: hide board elements
         let board = document.querySelector('#board' + boardId)
         let board_children = Array.from(board.children)
         let length = board.children.length;
@@ -40,6 +39,7 @@ function showHideButtonHandler(clickEvent) {
             length--;
         }
 
+        //todo: add allboards div and add id to it and via doc.sel set atrib hiden
 
         // for (let i = 0; i < board.childElementCount; i ++) {
         //     if (board.children[i].classList.includes('board-column')) {
@@ -56,6 +56,7 @@ function showHideButtonHandler(clickEvent) {
 }
 
 function changeBoardTitle(clickEvent) {
+    //todo: make input as inactive, activate it on click
     let target = clickEvent.target;
     let boardToUpdateID = target.id.slice(12, 16);
     let newBoardTitle = target.value;

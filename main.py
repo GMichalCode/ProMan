@@ -74,11 +74,11 @@ def get_card(card_id: int):
     return queries.get_card(card_id)
 
 
-@app.route("/check-if-board-title-exists")
-@json_response
-def check_if_board_title_exists(board_title: str):
-    answer = queries.check_if_board_title_exist(board_title)
-    return {'exist': answer}
+# @app.route("/check-if-board-title-exists")
+# @json_response
+# def check_if_board_title_exists(board_title: str):
+#     answer = queries.check_if_board_title_exist(board_title)
+#     return {'exist': answer}
 
 
 @app.route("/add-board", methods=['POST'])
@@ -86,6 +86,8 @@ def check_if_board_title_exists(board_title: str):
 def add_board():
     board_title = request.json['boardTitle']
     queries.add_board(board_title)
+
+    return """{"status": "success"}"""
 
 
 @app.route("/add-card")
@@ -101,6 +103,8 @@ def update_board_title():
     new_board_title = request.json['newBoardTitle']
     queries.update_board_title(board_to_update_id, new_board_title)
 
+    return """{"status": "success"}"""
+
 
 @app.route("/update-column-title", methods=['PUT'])
 @json_response
@@ -108,6 +112,8 @@ def update_column_title():
     column_to_update_id = request.json['columnID']
     new_column_title = request.json['newColumnTitle']
     queries.update_column_title(column_to_update_id, new_column_title)
+
+    return """{"status": "success"}"""
 
 
 def main():
