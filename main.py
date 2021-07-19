@@ -1,5 +1,4 @@
 from flask import Flask, render_template, url_for, request
-
 import queries
 from util import json_response
 
@@ -30,37 +29,18 @@ def get_board(board_id):
     return queries.get_board(board_id)
 
 
-@app.route("/get-columns")
+@app.route("/get-columns/<int:board_id>")
 @json_response
-def get_columns():
-    """
-    All the boards
-    """
-    return queries.get_columns()
 
+def get_columns(board_id):
+    return queries.get_columns(board_id)
 
-# @app.route("/get-connections/<int:board_id>")
-# @json_response
-# def get_connections(board_id):
-#     """
-#     All the boards
-#     """
-#     return queries.get_connections(board_id)
 
 
 @app.route("/get-column/<int:column_id>")
 @json_response
 def get_column(column_id):
-    """
-    All the boards
-    """
     return queries.get_column(column_id)
-
-
-@app.route("/get-board-columns/<int:board_id>")
-@json_response
-def get_columns_for_board(board_id: int):
-    return queries.get_board_columns(board_id)
 
 
 @app.route("/get-board-cards/<int:board_id>")
@@ -83,14 +63,11 @@ def get_card(card_id: int):
     return queries.get_card(card_id)
 
 
-@app.route("/get-if-board-title-exists")
-@json_response
-def get_if_board_title_exists(board_title: str):
-    """
-    All cards that belongs to a board
-    :param board_id: id of the parent board
-    """
-    return queries.check_if_board_title_exist(board_title)
+# @app.route("/check-if-board-title-exists")
+# @json_response
+# def check_if_board_title_exists(board_title: str):
+#     answer = queries.check_if_board_title_exist(board_title)
+#     return {'exist': answer}
 
 
 @app.route("/add-board", methods=['POST'])
@@ -98,6 +75,8 @@ def get_if_board_title_exists(board_title: str):
 def add_board():
     board_title = request.json['boardTitle']
     queries.add_board(board_title)
+
+    return """{"status": "success"}"""
 
 
 @app.route("/add-card")
@@ -113,6 +92,8 @@ def update_board_title():
     new_board_title = request.json['newBoardTitle']
     queries.update_board_title(board_to_update_id, new_board_title)
 
+    return """{"status": "success"}"""
+
 
 @app.route("/update-column-title", methods=['PUT'])
 @json_response
@@ -120,6 +101,14 @@ def update_column_title():
     column_to_update_id = request.json['columnID']
     new_column_title = request.json['newColumnTitle']
     queries.update_column_title(column_to_update_id, new_column_title)
+
+    return """{"status": "success"}"""
+
+
+@app.route("/login", methods=['POST', 'GET'])
+@json_response
+def login():
+    return {'message': "Incorrect email/password", 'status': 404}
 
 
 def main():

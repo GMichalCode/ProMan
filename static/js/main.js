@@ -1,6 +1,8 @@
+import {signInManager} from "./signInManager.js";
 import {boardsManager} from "./boardsManager.js";
 
 function init() {
+    signInManager.addEventListener()
     boardsManager.loadBoards()
 }
 
