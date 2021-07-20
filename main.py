@@ -79,7 +79,8 @@ def get_card(card_id: int):
 @json_response
 def add_board():
     board_title = request.json['boardTitle']
-    queries.add_board(board_title)
+    new_board_id = queries.add_board(board_title)['id']
+    queries.add_default_columns(new_board_id)
 
     return """{"status": "success"}"""
 

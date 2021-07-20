@@ -92,10 +92,11 @@ def get_board_columns(board_id):
 
 def add_board(board_title):
     if not check_if_board_title_exist1(board_title):
-        data_manager.execute_insert(
+        return data_manager.execute_insert(
             """
             INSERT INTO boards (title)
-            VALUES (%(board_title)s);
+            VALUES (%(board_title)s)
+            RETURNING id;
             """, {"board_title": board_title})
 
 
@@ -141,3 +142,14 @@ def get_column_cards(column_id):
     SELECT * FROM cards
     WHERE column_id = %(column_id)s
     """, {'column_id': column_id})
+
+
+def add_default_columns(board_id):
+    data_manager.execute_insert("""
+    INSERT INTO columns (title, is_deleted, board_id, column_order)
+    VALUES ('New', false, %(board_id)s, 99),
+            ('In Progress', false, %(board_id)s, 99),
+            ('Testing', false, %(board_id)s, 99),
+            ('Done', false, %(board_id)s, 99)
+    RETURNING %(board_id)s
+    """, {"board_id": board_id})
