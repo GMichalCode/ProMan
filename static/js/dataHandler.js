@@ -6,8 +6,8 @@ export let dataHandler = {
         // the board is retrieved and then the callback function is called with the board
         return await apiGet(`/get-boards/${boardId}`)
     },
-    getIfBoardTitleExists: async function (boardId) {
-        return await apiGet(`/get-if-board-title-exists`)
+    checkIfBoardTitleExists: async function (boardTitle) {
+        return await apiGet(`/check-if-board-title-exists`)
     },
     getColumns: async function (boardId) {
         // the statuses are retrieved and then the callback function is called with the statuses
@@ -41,6 +41,9 @@ export let dataHandler = {
     updateColumnTitle: async function (columnToUpdateID, newColumnTitle) {
         let newColumnTitleToUpdate = {'columnID': columnToUpdateID, 'newColumnTitle': newColumnTitle}
         await apiPut(`/update-column-title`, newColumnTitleToUpdate)
+    },
+    signIn: async function (formData) {
+        return await apiPost('/login', Object.fromEntries(formData))
     }
 };
 
@@ -89,3 +92,4 @@ async function apiPut(url, payload) {
         return data
     }
 }
+

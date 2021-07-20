@@ -26,7 +26,9 @@ function boardBuilder(board) {
                     <div class="board-header">
                         <input class="board-title" maxlength="40" id="board-title-${board.id}" value="${board.title}">
                         <button class="board-add" data-board-id="${board.id}">Add Card</button>
-                        <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
+<!--                       
+ <button class='board-toggle[data-board-id="${board.id}"]' data-board-id="${board.id}">Show<i class="fas fa-chevron-down"></i></button>-->
+                    <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
                     </div>
            <div class="board-columns" data-board-id="${board.id}"></div>
                 </section>
@@ -42,7 +44,7 @@ function cardBuilder(card) {
 
 function columnBuilder(boardId, column) {
     return `<div class="board-column" id="column${column.id}">
-                    <div class="board-column-title">${column.title}</div>
+                    <input class="column-title" id="column-title-${column.id}" value="${column.title}">
                     <div class="board${boardId}-column-content" data-column-id="${column.id}"></div>
             </div>`
 }

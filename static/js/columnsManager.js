@@ -4,16 +4,19 @@ import {domManager} from "./domManager.js";
 
 export let columnsManager = {
     loadColumns: async function (boardId, callback) {
-        const columns = await dataHandler.getColumnsByBoardId(boardId);
+        const columns = await dataHandler.getColumns(boardId);
         for (let column of columns) {
             const columnBuilder = htmlFactory(htmlTemplates.column);
             const content = columnBuilder(boardId, column)
-            domManager.addChild('#board' + boardId, content)
-            //domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content)
+            domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content)
             domManager.addEventListener(`#column-title-${column.id}`, "change", changeColumnTitle);
         }
         callback();
     },
+    // hideColumns: async function (boardId, callback) {
+    //     const columns = await dataHandler.getColumnsByBoardId(boardId);
+    //
+    // }
 }
 
 function changeColumnTitle(clickEvent) {
