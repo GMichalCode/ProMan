@@ -1,7 +1,6 @@
 import {dataHandler} from "./dataHandler.js";
 import {htmlFactory, htmlTemplates} from "./htmlFactory.js";
 import {domManager} from "./domManager.js";
-import {cardsManager} from "./cardsManager.js";
 import {columnsManager} from "./columnsManager.js";
 
 export let boardsManager = {
@@ -31,9 +30,7 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
-    columnsManager.loadColumns(boardId, function () {
-        cardsManager.loadCards(boardId);
-    })
+    columnsManager.loadColumns(boardId)
 }
 
 // if (clickEvent.target.innerHTML === "Hide") {

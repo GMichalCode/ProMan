@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request
+
 import queries
 from util import json_response
 
@@ -29,12 +30,16 @@ def get_board(board_id):
     return queries.get_board(board_id)
 
 
+@app.route("/get-column-cards/<int:column_id>")
+@json_response
+def get_column_cards(column_id):
+    return queries.get_column_cards(column_id)
+
+
 @app.route("/get-columns/<int:board_id>")
 @json_response
-
 def get_columns(board_id):
     return queries.get_columns(board_id)
-
 
 
 @app.route("/get-column/<int:column_id>")

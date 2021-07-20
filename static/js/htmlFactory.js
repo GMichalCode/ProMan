@@ -45,6 +45,6 @@ function cardBuilder(card) {
 function columnBuilder(boardId, column) {
     return `<div class="board-column" id="column${column.id}">
                     <input class="column-title" id="column-title-${column.id}" value="${column.title}">
-                    <div class="board${boardId}-column-content" data-column-id="${column.id}"></div>
+                    <div class='board${boardId}-column-content[data-column-id=${column.id}]' id='board${boardId}-column${column.id}-content'></div>
             </div>`
 }

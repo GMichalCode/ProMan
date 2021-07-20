@@ -41,14 +41,14 @@ def get_board(board_id):
     )
 
 
-def get_cards_for_board(board_id):
-    matching_cards = data_manager.execute_select(
-        """
-        SELECT * FROM cards
-        WHERE board_id = %(board_id)s AND is_deleted = FALSE
-        ;
-        """, {"board_id": board_id})
-    return matching_cards
+# def get_cards_for_board(board_id):
+#     matching_cards = data_manager.execute_select(
+#         """
+#         SELECT * FROM cards
+#         WHERE board_id = %(board_id)s AND is_deleted = FALSE
+#         ;
+#         """, {"board_id": board_id})
+#     return matching_cards
 
 
 def get_card(card_id):
@@ -134,3 +134,10 @@ def update_column_title(column_to_update_id, new_column_title):
         WHERE id = (%(column_to_update_id)s)
         """, {'new_column_title': new_column_title, 'column_to_update_id': column_to_update_id}
     )
+
+
+def get_column_cards(column_id):
+    return data_manager.execute_select("""
+    SELECT * FROM cards
+    WHERE column_id = %(column_id)s
+    """, {'column_id': column_id})
