@@ -24,7 +24,7 @@ export function htmlFactory(template) {
 }
 
 function boardBuilder(board) {
-    return `<div class="board-container">
+    return `<div class="board-container" draggable="true">
                 <section class="board" data-board-id="${board.id}" id="board${board.id}">
                     <div class="board-header">
                         <input class="board-title" maxlength="40" id="board-title-${board.id}" value="${board.title}">
