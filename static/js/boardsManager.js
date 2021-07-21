@@ -48,7 +48,10 @@ function makeDocChangesAfterAddingBoard(boardId, boardContent, defaultColumnsCon
     domManager.addChild(`#board-${boardId}`, defaultColumnsContent);
     domManager.addEventListener(`.board-toggle[data-board-id="${boardId}"]`, "click", showHideButtonHandler);
     domManager.addEventListener(`#board-title-${boardId}`, "change", changeBoardTitle);
-    document.getElementById('board-name-input').value = "";
+    document.getElementById('board-name-input').value = "Successfully added!";
+    setTimeout(function () {
+        document.getElementById('board-name-input').value = ""
+    }, 2000)
 }
 
 // if (clickEvent.target.innerHTML === "Hide") {
