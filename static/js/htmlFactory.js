@@ -52,24 +52,24 @@ function columnBuilder(boardId, column) {
             </div>`
 }
 
-function getDefaultColumnsHTML() {
-    return `<div class="board-column" id="column${'tmp'}">
-                    <input class="column-title" id="column-title-${'tmp'}" value="${'New'}">
-                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
+function getDefaultColumnsHTML(boardId, columnIds) {
+    return `<div class="board-column" id="column${columnIds[0]['id']}">
+                    <input class="column-title" id="column-title-${columnIds[0]['id']}" value="${'New'}">
+                    <div class='board${boardId}-column-content[data-column-id=${columnIds[0]['id']}]' id='board${boardId}-column${columnIds[0]['id']}-content'></div>
             </div>
 
-            <div class="board-column" id="column${'tmp'}">
-                    <input class="column-title" id="column-title-${'tmp'}" value="${'In Progress'}">
-                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
+            <div class="board-column" id="column${columnIds[1]['id']}">
+                    <input class="column-title" id="column-title-${columnIds[1]['id']}" value="${'In Progress'}">
+                    <div class='board${boardId}-column-content[data-column-id=${columnIds[1]['id']}]' id='board${boardId}-column${columnIds[1]['id']}-content'></div>
             </div>
             
-            <div class="board-column" id="column${'tmp'}">
-                    <input class="column-title" id="column-title-${'tmp'}" value="${'Testing'}">
-                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
+            <div class="board-column" id="column${columnIds[2]['id']}">
+                    <input class="column-title" id="column-title-${columnIds[2]['id']}" value="${'Testing'}">
+                    <div class='board${boardId}-column-content[data-column-id=${columnIds[2]['id']}]' id='board${boardId}-column${columnIds[2]['id']}-content'></div>
             </div>
 
-            <div class="board-column" id="column${'tmp'}">
-                    <input class="column-title" id="column-title-${'tmp'}" value="${'Done'}">
-                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
+            <div class="board-column" id="column${columnIds[3]['id']}">
+                    <input class="column-title" id="column-title-${columnIds[3]['id']}" value="${'Done'}">
+                    <div class='board${boardId}-column-content[data-column-id=${columnIds[3]['id']}]' id='board${boardId}-column${columnIds[3]['id']}-content'></div>
             </div>`
 }

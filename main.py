@@ -48,23 +48,19 @@ def get_column(column_id):
     return queries.get_column(column_id)
 
 
-@app.route("/get-board-cards/<int:board_id>")
-@json_response
-def get_cards_for_board(board_id: int):
-    """
-    All cards that belongs to a board
-    :param board_id: id of the parent board
-    """
-    return queries.get_cards_for_board(board_id)
+# @app.route("/get-board-cards/<int:board_id>")
+# @json_response
+# def get_cards_for_board(board_id: int):
+#     """
+#     All cards that belongs to a board
+#     :param board_id: id of the parent board
+#     """
+#     return queries.get_cards_for_board(board_id)
 
 
 @app.route("/get-cards/<int:card_id>")
 @json_response
 def get_card(card_id: int):
-    """
-    All cards that belongs to a board
-    :param board_id: id of the parent board
-    """
     return queries.get_card(card_id)
 
 
@@ -80,9 +76,9 @@ def get_card(card_id: int):
 def add_board():
     board_title = request.json['boardTitle']
     new_board_id = queries.add_board(board_title)['id']
-    queries.add_default_columns(new_board_id)
+    new_columns_ids = queries.add_default_columns(new_board_id)
 
-    return {"new_board_id": new_board_id}
+    return [{"new_board_id": new_board_id}, {"new_columns_ids": new_columns_ids}]
 
 
 @app.route("/add-card")

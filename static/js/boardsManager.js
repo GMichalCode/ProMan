@@ -20,21 +20,34 @@ export let boardsManager = {
         //todo: check on front if board with input name already exists
         // dataHandler.checkIfBoardTitleExists(input)
         //todo: break it into smaller pieces
-        let newBoardId = dataHandler.createNewBoard(input);
-        let newBoard = {'id': 'temporary', 'title': input, 'is_deleted': false};
+
+        let newTmpBoard = {'id': 'tmpBoard', 'title': input, 'is_deleted': false};
+        const boardTmpBuilder = htmlFactory(htmlTemplates.board);
+        const content = boardTmpBuilder(newTmpBoard);
+        domManager.addChild('#root', content);
+
+        let newBoardData = await dataHandler.createNewBoard(input);
+        let newBoard = {'id': newBoardData[0]['new_board_id'], 'title': input, 'is_deleted': false};
         const boardBuilder = htmlFactory(htmlTemplates.board);
         const boardContent = boardBuilder(newBoard);
-        const defaultColumnsBuilder = htmlFactory(htmlTemplates.defaultColumns)
-        const defaultColumnsContent = defaultColumnsBuilder();
-        domManager.addChild('#root', boardContent);
-        domManager.addChild('#board-temporary', defaultColumnsContent);
-        document.getElementById('board-name-input').value = "";
+        const defaultColumnsBuilder = htmlFactory(htmlTemplates.defaultColumns);
+        const defaultColumnsContent = defaultColumnsBuilder(newBoardData[0]['new_board_id'], newBoardData[1]['new_columns_ids']);
+        makeDocChangesAfterAddingBoard(newBoard['id'], boardContent, defaultColumnsContent);
+        document.querySelector('#board-tmpBoard').parentNode.remove()
     }
 }
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
     columnsManager.loadColumns(boardId)
+}
+
+function makeDocChangesAfterAddingBoard(boardId, boardContent, defaultColumnsContent) {
+    domManager.addChild('#root', boardContent);
+    domManager.addChild(`#board-${boardId}`, defaultColumnsContent);
+    domManager.addEventListener(`.board-toggle[data-board-id="${boardId}"]`, "click", showHideButtonHandler);
+    domManager.addEventListener(`#board-title-${boardId}`, "change", changeBoardTitle);
+    document.getElementById('board-name-input').value = "";
 }
 
 // if (clickEvent.target.innerHTML === "Hide") {

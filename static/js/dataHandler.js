@@ -29,7 +29,7 @@ export let dataHandler = {
     },
     createNewBoard: async function (boardTitle) {
         // creates new board, saves it and calls the callback function with its data
-        await apiPost('/add-board', {'boardTitle': boardTitle})
+        return await apiPost('/add-board', {'boardTitle': boardTitle})
     },
     createNewCard: async function (cardTitle, boardId, columnId) {
         // creates new card, saves it and calls the callback function with its data
