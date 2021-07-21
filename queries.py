@@ -118,11 +118,12 @@ def check_if_board_title_exist(board_title):
 
 
 def update_board_title(board_id, new_board_title):
-    data_manager.execute_select(
+    return data_manager.execute_select(
         """
         UPDATE boards
-        SET title = (%(new_board_title)s)
-        WHERE id = (%(board_id)s)
+        SET title = %(new_board_title)s
+        WHERE id = %(board_id)s
+        RETURNING title
         """, {'board_id': board_id, 'new_board_title': new_board_title}, False
     )
 
