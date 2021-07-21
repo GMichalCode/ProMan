@@ -15,16 +15,20 @@ export let boardsManager = {
         }
     },
 
-    createBoards: async function () {
+    createBoard: async function () {
         let input = document.getElementById('board-name-input').value;
         //todo: check on front if board with input name already exists
-        dataHandler.checkIfBoardTitleExists(input)
-        dataHandler.createNewBoard(input);
-        let newBoard = {'id': null, 'title': input, 'is_deleted': false};
+        // dataHandler.checkIfBoardTitleExists(input)
+        //todo: break it into smaller pieces
+        let newBoardId = dataHandler.createNewBoard(input);
+        let newBoard = {'id': 'temporary', 'title': input, 'is_deleted': false};
         const boardBuilder = htmlFactory(htmlTemplates.board);
-        const content = boardBuilder(newBoard);
-        domManager.addChild('#root', content);
-        document.getElementById('board-name-input').value = ""
+        const boardContent = boardBuilder(newBoard);
+        const defaultColumnsBuilder = htmlFactory(htmlTemplates.defaultColumns)
+        const defaultColumnsContent = defaultColumnsBuilder();
+        domManager.addChild('#root', boardContent);
+        domManager.addChild('#board-temporary', defaultColumnsContent);
+        document.getElementById('board-name-input').value = "";
     }
 }
 

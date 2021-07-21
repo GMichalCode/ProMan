@@ -9,7 +9,7 @@ function init() {
 function initCreateBoardButton() {
     let submitBoardTitleButton = document.getElementById('board-name-submit')
     submitBoardTitleButton.addEventListener('click', function () {
-        boardsManager.createBoards()
+        boardsManager.createBoard()
     })
 }
 

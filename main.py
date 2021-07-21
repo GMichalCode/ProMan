@@ -82,7 +82,7 @@ def add_board():
     new_board_id = queries.add_board(board_title)['id']
     queries.add_default_columns(new_board_id)
 
-    return """{"status": "success"}"""
+    return {"new_board_id": new_board_id}
 
 
 @app.route("/add-card")

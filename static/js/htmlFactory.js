@@ -1,7 +1,8 @@
 export const htmlTemplates = {
     board: 1,
     card: 2,
-    column: 3
+    column: 3,
+    defaultColumns: 4
 }
 
 export function htmlFactory(template) {
@@ -12,6 +13,8 @@ export function htmlFactory(template) {
             return cardBuilder
         case htmlTemplates.column:
             return columnBuilder
+        case htmlTemplates.defaultColumns:
+            return getDefaultColumnsHTML
         default:
             console.error("Undefined template: " + template)
             return () => {
@@ -30,7 +33,7 @@ function boardBuilder(board) {
  <button class='board-toggle[data-board-id="${board.id}"]' data-board-id="${board.id}">Show<i class="fas fa-chevron-down"></i></button>-->
                     <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
                     </div>
-           <div class="board-columns" data-board-id="${board.id}"></div>
+           <div class="board-columns" data-board-id="${board.id}" id="board-${board.id}"></div>
                 </section>
              </div> `
 }
@@ -46,5 +49,27 @@ function columnBuilder(boardId, column) {
     return `<div class="board-column" id="column${column.id}">
                     <input class="column-title" id="column-title-${column.id}" value="${column.title}">
                     <div class='board${boardId}-column-content[data-column-id=${column.id}]' id='board${boardId}-column${column.id}-content'></div>
+            </div>`
+}
+
+function getDefaultColumnsHTML() {
+    return `<div class="board-column" id="column${'tmp'}">
+                    <input class="column-title" id="column-title-${'tmp'}" value="${'New'}">
+                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
+            </div>
+
+            <div class="board-column" id="column${'tmp'}">
+                    <input class="column-title" id="column-title-${'tmp'}" value="${'In Progress'}">
+                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
+            </div>
+            
+            <div class="board-column" id="column${'tmp'}">
+                    <input class="column-title" id="column-title-${'tmp'}" value="${'Testing'}">
+                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
+            </div>
+
+            <div class="board-column" id="column${'tmp'}">
+                    <input class="column-title" id="column-title-${'tmp'}" value="${'Done'}">
+                    <div class='board${'tmp'}-column-content[data-column-id=${'tmp'}]' id='board${'tmp'}-column${'tmp'}-content'></div>
             </div>`
 }
