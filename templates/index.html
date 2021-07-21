@@ -29,12 +29,10 @@
 
 </head>
 <body>
-<input id="board-name-input" type="text" name="board-title" placeholder="insert board title" required>
-<input id="board-name-submit" type="submit" value="Add New Board">
 
 <div id="navbar">
     <ul>
-        <li><a href="#home">Home</a></li>
+        {#        <li><a href="#home">Home</a></li>#}
         <li style="float:right">
             <button class="active" id="sign_in">Sign In</button>
         </li>
@@ -42,6 +40,14 @@
 </div>
 <!-- Emmet: .board-container>section.board*3>.board-header>(span.board-title{Board $}+button.board-add{Add Card}+button.board-toggle>i.fas.fa-chevron-down)^.board-columns>((.board-column>.board-column-title{New}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))+(.board-column>.board-column-title{In Progress}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))+(.board-column>.board-column-title{Testing}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))+(.board-column>.board-column-title{Done}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))) -->
 <h1>ProMan</h1>
+<a>
+    <div class="new-board-container">
+        <input id="board-name-input" type="text" name="board-title" placeholder="New board title" required>
+        <input id="board-name-submit" type="submit" value="Add New Board">
+    </div>
+</a>
+
+
 <div id="root"></div>
 
 <script

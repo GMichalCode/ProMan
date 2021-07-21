@@ -37,7 +37,7 @@ button {
 }
 
 .board-container {
-    max-width: 960px;
+    max-width: 90%;
     margin: 0 auto;
 
 }
@@ -73,7 +73,7 @@ section.board {
 .board-columns {
     display: flex;
     flex-wrap: nowrap;
-    /*justify-content: space-between;*/
+    /* justify-content: space-between; */
 }
 
 .board-column {
@@ -248,8 +248,8 @@ section.board {
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
-  font-weight: bold;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
@@ -257,4 +257,8 @@ section.board {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.new-board-container {
+    text-align: center;
 }
