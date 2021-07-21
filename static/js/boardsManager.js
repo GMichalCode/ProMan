@@ -17,6 +17,7 @@ export let boardsManager = {
 
     createBoard: async function () {
         let input = document.getElementById('board-name-input').value;
+        document.getElementById('board-name-input').value = "In progress, please wait..";
         //todo: check on front if board with input name already exists
         // dataHandler.checkIfBoardTitleExists(input)
         //todo: break it into smaller pieces
