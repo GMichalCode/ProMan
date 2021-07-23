@@ -1,14 +1,19 @@
+import {signInManager} from "./signInManager.js";
 import {boardsManager} from "./boardsManager.js";
 
 function init() {
+    signInManager.addEventListener()
     boardsManager.loadBoards()
 }
 
 function initCreateBoardButton() {
     let submitBoardTitleButton = document.getElementById('board-name-submit')
     submitBoardTitleButton.addEventListener('click', function () {
-        boardsManager.createBoards()
-        //todo: odświeżenie widoku na stronie, najlepiej dodać DOMem te dane mimo, że ich jeszcze nie ma w DB
+        if (document.getElementById('board-name-input').value !== "") {
+            let newBoardID = boardsManager.createBoard()
+        } else {
+            document.getElementById('board-name-input').setAttribute('placeholder', 'Insert new board title!')
+        }
     })
 }
 
