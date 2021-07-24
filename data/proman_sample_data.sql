@@ -66,14 +66,15 @@ INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 1, 'new card 2', 2);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 2, 'in progress card', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 3, 'planning', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 4, 'done card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 4, 'done card 1', 2);
+INSERT INTO cards
+VALUES (nextval('cards_id_seq'), 2, 4, 'done card 1', 2);
 
 ---
 --- add constraints
 ---
 
 ALTER TABLE ONLY cards
-    ADD CONSTRAINT fk_cards_board_id FOREIGN KEY (board_id) REFERENCES boards(id);
+    ADD CONSTRAINT fk_cards_board_id FOREIGN KEY (board_id) REFERENCES boards (id);
 
 ALTER TABLE ONLY cards
-    ADD CONSTRAINT fk_cards_status_id FOREIGN KEY (column_id) REFERENCES statuses(id);
+    ADD CONSTRAINT fk_cards_status_id FOREIGN KEY (status_id) REFERENCES statuses (id);
