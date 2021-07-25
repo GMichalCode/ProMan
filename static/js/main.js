@@ -1,13 +1,13 @@
 import {signInManager} from "./signInManager.js";
 import {boardsManager} from "./boardsManager.js";
-
+import {logInManager} from "./logInManager.js";
 
 init();
-
 
 function init() {
     initCreateBoardButton();
     signInManager.addEventListener()
+    logInManager.addEventListener()
     boardsManager.loadBoards()
     console.debug("set drag start end 1")
     setDragStartAndDragEnd(document.querySelectorAll('.card'));

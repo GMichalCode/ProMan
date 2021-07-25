@@ -2,7 +2,9 @@ export const htmlTemplates = {
     board: 1,
     card: 2,
     column: 3,
-    defaultColumns: 4
+    signIn: 4,
+    logIn: 5,
+    defaultColumns: 6
 }
 
 export function htmlFactory(template) {
@@ -13,6 +15,10 @@ export function htmlFactory(template) {
             return cardBuilder
         case htmlTemplates.column:
             return columnBuilder
+        case htmlTemplates.signIn:
+            return signInBuilder
+        case htmlTemplates.logIn:
+            return logInBuilder
         case htmlTemplates.defaultColumns:
             return getDefaultColumnsHTML
         default:
@@ -52,6 +58,31 @@ function columnBuilder(boardId, column) {
             </div>`
 }
 
+function signInBuilder () {
+    return `<div id="signInModal" class="modal">
+    <div class="modal-content">
+        <span id="closeSignInModal" align="right" class="close">&times;</span>
+        <div align="center">
+              <div align="center" class="border">
+                 <div class="header">
+                    <h1 class="word">Sign In</h1>
+                 </div><br>
+                    <h2 class="word">Please fill the form:</h2>
+                 </div>
+                <h2 class="word">
+                    <form id="signInForm">
+                      <div class="msg"></div><br>
+                        <input id="email" name="email" type="text" placeholder="Enter Your Email" class="textbox"/><br><br>
+                        <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/><br><br>
+                        <input id="login" type="submit" class="btn" value="Sign In"><br>
+                    </form>
+                </h2>
+              </div>
+            </div>
+      </div>
+    </div>`
+}
+
 function getDefaultColumnsHTML(boardId, columnIds) {
     return `<div class="board-column" id="column${columnIds[0]['id']}">
                     <input class="column-title" id="column-title-${columnIds[0]['id']}" value="${'New'}">
@@ -72,4 +103,29 @@ function getDefaultColumnsHTML(boardId, columnIds) {
                     <input class="column-title" id="column-title-${columnIds[3]['id']}" value="${'Done'}">
                     <div class='board${boardId}-column-content[data-column-id=${columnIds[3]['id']}]' id='board${boardId}-column${columnIds[3]['id']}-content'></div>
             </div>`
+}
+
+function logInBuilder () {
+    return `<div id="logInModal" class="modal">
+    <div class="modal-content">
+        <span id="closeLogInModal" align="right" class="close">&times;</span>
+        <div align="center">
+              <div align="center" class="border">
+                 <div class="header">
+                    <h1 class="word">Log In</h1>
+                 </div><br>
+                    <h2 class="word">Please fill the form:</h2>
+                 </div>
+                <h2 class="word">
+                    <div id="logInForm">
+                      <div id="login_message_div" class="msg"></div><br>
+                        <input id="login_email" name="email" type="text" placeholder="Enter Your Email" class="textbox"/><br><br>
+                        <input id="login_password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/><br><br>
+                        <button id="login_login" type="submit" class="btn" value="Log In">Enter the page</button><br>
+                    </div>
+                </h2>
+              </div>
+            </div>
+      </div>
+    </div>`
 }

@@ -47,6 +47,17 @@ export let dataHandler = {
     },
     signIn: async function (formData) {
         return await apiPost('/login', Object.fromEntries(formData))
+    },
+    register: async function (email, password) {
+        let registerUser = {"email": email, "password": password}
+        return await apiPost('/register', registerUser)
+    },
+    login: async function (email, password) {
+        let loginUser = {"email": email, "password": password}
+        return await apiPost('/login', loginUser)
+    },
+    logout: async function() {
+        return await apiPost('/logout')
     }
 };
 

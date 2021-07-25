@@ -1,10 +1,13 @@
-from flask import Flask, render_template, url_for, request
-
+from flask import Flask, render_template, url_for, request, make_response, jsonify
 import queries
 from util import json_response
+import bcrypt
+import re
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/ProMan'
+
+sessions = []
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -12,7 +15,7 @@ def index():
     """
     This is a one-pager which shows all the boards and cards
     """
-    return render_template('index.html')
+    return render_template('index.html', logged=authenticate_user(request))
 
 
 @app.route("/get-boards")
@@ -107,10 +110,64 @@ def update_column_title():
     return """{"status": "success"}"""
 
 
-@app.route("/login", methods=['POST', 'GET'])
-@json_response
+@app.route("/login", methods=['POST'])
 def login():
-    return {'message': "Incorrect email/password", 'status': 404}
+    email = request.json['email']
+    password = request.json['password']
+    user_from_db = queries.login(email, False)
+    if user_from_db is not None and verify_password(password, user_from_db['password']):
+        resp = make_response(jsonify({'message': "Ok"}))
+        resp.set_cookie('SESSION', str(user_from_db['id']))
+        sessions.append(user_from_db['id'])
+        return resp
+    else:
+        return {'message': "Incorrect email/password"}
+
+
+@app.route('/register', methods=["POST"])
+def registration():
+    email = request.json['email']
+    account = queries.check_new_user(email)
+    if request.json['password'] == "":
+        return {'message': 'Please fill out ALL forms !'}
+    else:
+        password = hash_password(request.json['password'])
+    if email == "":
+        return {'message': 'Please fill out ALL forms !'}
+    elif account:
+        return {'message': 'This email is already in use !'}
+    elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        return {'message': "Invalid email address !"}
+    else:
+        queries.register_new_user(email, password)
+        return {'message': "Ok"}, 200
+
+
+@app.route('/logout', methods=["POST"])
+def logout():
+    id_authenticator = int(request.cookies.get('SESSION'))
+    sessions.remove(id_authenticator)
+    return {'message': "Ok"}, 200
+
+
+def authenticate_user(request):
+    id_authenticator = int(request.cookies.get('SESSION'))
+    return id_authenticator in sessions
+
+
+def current_user(request):
+    current_user_id = request.cookies.get('SESSION')
+    return queries.get_user_by_id(current_user_id)
+
+
+def hash_password(plain_password):
+    hashed_password = bcrypt.hashpw(plain_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_password.decode('utf-8')
+
+
+def verify_password(plain_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_bytes_password)
 
 
 def main():
