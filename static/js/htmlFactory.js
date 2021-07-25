@@ -3,6 +3,7 @@ export const htmlTemplates = {
     card: 2,
     column: 3,
     signIn: 4,
+    logIn: 5,
 }
 
 export function htmlFactory(template) {
@@ -15,6 +16,8 @@ export function htmlFactory(template) {
             return columnBuilder
         case htmlTemplates.signIn:
             return signInBuilder
+        case htmlTemplates.logIn:
+            return logInBuilder
         default:
             console.error("Undefined template: " + template)
             return () => {
@@ -53,11 +56,11 @@ function columnBuilder(boardId, column) {
 function signInBuilder () {
     return `<div id="signInModal" class="modal">
     <div class="modal-content">
-        <span align="right" class="close">&times;</span>
+        <span id="closeSignInModal" align="right" class="close">&times;</span>
         <div align="center">
               <div align="center" class="border">
                  <div class="header">
-                    <h1 class="word">Sign In Page</h1>
+                    <h1 class="word">Sign In</h1>
                  </div><br>
                     <h2 class="word">Please fill the form:</h2>
                  </div>
@@ -68,6 +71,31 @@ function signInBuilder () {
                         <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/><br><br>
                         <input id="login" type="submit" class="btn" value="Sign In"><br>
                     </form>
+                </h2>
+              </div>
+            </div>
+      </div>
+    </div>`
+}
+
+function logInBuilder () {
+    return `<div id="logInModal" class="modal">
+    <div class="modal-content">
+        <span id="closeLogInModal" align="right" class="close">&times;</span>
+        <div align="center">
+              <div align="center" class="border">
+                 <div class="header">
+                    <h1 class="word">Log In</h1>
+                 </div><br>
+                    <h2 class="word">Please fill the form:</h2>
+                 </div>
+                <h2 class="word">
+                    <div id="logInForm">
+                      <div id="login_message_div" class="msg"></div><br>
+                        <input id="login_email" name="email" type="text" placeholder="Enter Your Email" class="textbox"/><br><br>
+                        <input id="login_password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/><br><br>
+                        <button id="login_login" type="submit" class="btn" value="Log In">Enter the page</button><br>
+                    </div>
                 </h2>
               </div>
             </div>

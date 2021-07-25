@@ -127,3 +127,42 @@ def update_column_title(column_to_update_id, new_column_title):
         WHERE id = (%(column_to_update_id)s)
         """, {'new_column_title': new_column_title, 'column_to_update_id': column_to_update_id}
     )
+
+
+def register_new_user(email, password):
+    data_manager.execute_insert(
+        """
+        INSERT INTO users (email, password) 
+        values (%(email)s, %(password)s)
+        """, {'email': email, 'password': password}
+    )
+
+
+def check_new_user(email):
+    query = f"SELECT * FROM users WHERE email='{email}';"
+    return data_manager.execute_select(
+        f"""
+        SELECT email
+        FROM users
+        WHERE email='{email}';
+        """, {'email' : email}, False
+    )
+
+
+def login(email, fetchall=True):
+    return data_manager.execute_select(
+        """
+        SELECT id, email, password 
+        FROM users 
+        where email=%(email)s
+        """, {'email': email}, fetchall)
+
+
+def get_user_by_id(user_id):
+    return data_manager.execute_select(
+        """
+        SELECT * 
+        FROM users
+        WHERE id=%(id)s
+        """, {'id': user_id}, False
+    )

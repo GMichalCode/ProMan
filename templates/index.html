@@ -38,7 +38,13 @@
     <div id="navbar">
         <ul>
             <li><a href="#home">Home</a></li>
-            <li style="float:right"><button class="active" id="sign_in">Sign In</button></li>
+            {% if logged %}
+                <li style="float:right"><button class="active" id="logout">Log Out</button></li>
+            {% else %}
+                <li style="float:right"><button class="active" id="login">Log In</button></li>
+                <a></a>
+                <li style="float:right"><button class="active" id="signIn">Sign In</button></li>
+            {% endif %}
         </ul>
     </div>
 
