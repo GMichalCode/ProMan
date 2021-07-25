@@ -58,6 +58,8 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
+
+
 @app.route("/get-cards/<int:card_id>")
 @json_response
 def get_card(card_id: int):
@@ -111,10 +113,19 @@ def update_column_title():
     return """{"status": "success"}"""
 
 
+
+
 @app.route("/login", methods=['POST', 'GET'])
 @json_response
 def login():
     return {'message': "Incorrect email/password", 'status': 404}
+
+
+@app.route("/delete-card/<int:card_id>", methods=['DELETE'])
+@json_response
+def delete_card(card_id: int):
+    queries.delete_card(card_id)
+    return """{"status": "success"}"""
 
 
 def main():

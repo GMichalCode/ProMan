@@ -10,7 +10,7 @@ def get_card_column(column_id):
     column = data_manager.execute_select(
         """
         SELECT * FROM columns
-        WHERE id = %(column_id)s AND is_deleted = FALSE
+        WHERE (id = %(column_id)s AND is_deleted = FALSE)
         ;
         """, {"column_id": column_id})
 
@@ -55,7 +55,7 @@ def get_card(card_id):
     card = data_manager.execute_select(
         """
         SELECT * FROM cards c
-        WHERE c.id = %(card_id)s AND c.is_deleted = FALSE
+        WHERE (c.id = %(card_id)s AND c.is_deleted = False)
         ;
         """, {"card_id": card_id}, False)
 
@@ -140,7 +140,7 @@ def update_column_title(column_to_update_id, new_column_title):
 def get_column_cards(column_id):
     return data_manager.execute_select("""
     SELECT * FROM cards
-    WHERE column_id = %(column_id)s
+    WHERE column_id = %(column_id)s AND is_deleted = False
     """, {'column_id': column_id})
 
 
@@ -153,3 +153,13 @@ def add_default_columns(board_id):
             ('Done', false, %(board_id)s, 99)
     RETURNING %(board_id)s
     """, {"board_id": board_id})
+
+
+def delete_card(card_id):
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET is_deleted = True
+        WHERE id = (%(card_id)s)
+        """, {'card_id': card_id}
+    )

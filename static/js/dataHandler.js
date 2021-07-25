@@ -47,6 +47,9 @@ export let dataHandler = {
     },
     signIn: async function (formData) {
         return await apiPost('/login', Object.fromEntries(formData))
+    },
+    deleteCard: async function (cardId){
+        return await apiDelete(`/delete-card/${cardId}`)
     }
 };
 
