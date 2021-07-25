@@ -33,13 +33,13 @@ function boardBuilder(board) {
  <button class='board-toggle[data-board-id="${board.id}"]' data-board-id="${board.id}">Show<i class="fas fa-chevron-down"></i></button>-->
                     <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
                     </div>
-           <div class="board-columns" data-board-id="${board.id}" id="board-${board.id}"></div>
+           <div class="board-columns" data-board-id="${board.id}" id="board-${board.id}" hidden></div>
                 </section>
              </div> `
 }
 
 function cardBuilder(card) {
-    return `<div class="card" data-card-id="${card.id}" id="card${card.id}" draggable="true">
+    return `<div class="card" data-card-id="${card.id}" id="card${card.id}" draggable="true" >
                 <div class="card-remove" id="removeCard${card.id}"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title" id="cardTitle${card.id}">${card.title}</div>
             </div>`;
