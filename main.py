@@ -1,8 +1,10 @@
+import re
+
+import bcrypt
 from flask import Flask, render_template, url_for, request, make_response, jsonify
+
 import queries
 from util import json_response
-import bcrypt
-import re
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/ProMan'
@@ -15,7 +17,8 @@ def index():
     """
     This is a one-pager which shows all the boards and cards
     """
-    return render_template('index.html', logged=authenticate_user(request))
+    return render_template('index.html')
+    # return render_template('index.html', logged=authenticate_user(request))
 
 
 @app.route("/get-boards")
@@ -150,14 +153,14 @@ def logout():
     return {'message': "Ok"}, 200
 
 
-def authenticate_user(request):
-    id_authenticator = int(request.cookies.get('SESSION'))
-    return id_authenticator in sessions
+# def authenticate_user(request):
+#     id_authenticator = int(request.cookies.get('SESSION'))
+#     return id_authenticator in sessions
 
 
-def current_user(request):
-    current_user_id = request.cookies.get('SESSION')
-    return queries.get_user_by_id(current_user_id)
+# def current_user(request):
+#     current_user_id = request.cookies.get('SESSION')
+#     return queries.get_user_by_id(current_user_id)
 
 
 def hash_password(plain_password):
