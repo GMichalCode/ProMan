@@ -29,15 +29,19 @@
 
 </head>
 <body>
+    <div id="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            {% if logged %}
+                <li style="float:right"><button class="active" id="logout">Log Out</button></li>
+            {% else %}
+                <li style="float:right"><button class="active" id="login">Log In</button></li>
+                <a></a>
+                <li style="float:right"><button class="active" id="signIn">Sign In</button></li>
+            {% endif %}
+        </ul>
+    </div>
 
-<div id="navbar">
-    <ul>
-        {#        <li><a href="#home">Home</a></li>#}
-        <li style="float:right">
-            <button class="active" id="sign_in">Sign In</button>
-        </li>
-    </ul>
-</div>
 <!-- Emmet: .board-container>section.board*3>.board-header>(span.board-title{Board $}+button.board-add{Add Card}+button.board-toggle>i.fas.fa-chevron-down)^.board-columns>((.board-column>.board-column-title{New}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))+(.board-column>.board-column-title{In Progress}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))+(.board-column>.board-column-title{Testing}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))+(.board-column>.board-column-title{Done}+.board-column-content>.card*5>(.card-remove>i.fas.fa-trash-alt^.card-title{Card $}))) -->
 <h1>ProMan</h1>
 <a>
@@ -49,7 +53,6 @@
 
 
 <div id="root"></div>
-
 <script
         src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -60,6 +63,5 @@
         crossorigin="anonymous"></script>
 
 <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-
 </body>
 </html>

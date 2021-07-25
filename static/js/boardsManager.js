@@ -12,6 +12,7 @@ export let boardsManager = {
             domManager.addChild('#root', content);
             domManager.addEventListener(`.board-toggle[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
             domManager.addEventListener(`#board-title-${board.id}`, "change", changeBoardTitle);
+            await columnsManager.loadColumns(board.id)
         }
     },
 
@@ -40,7 +41,12 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
-    columnsManager.loadColumns(boardId)
+    let boardColumns = document.getElementById(`board-${boardId}`)
+    if (boardColumns.hasAttribute('hidden')) {
+        boardColumns.removeAttribute('hidden')
+    } else {
+        boardColumns.setAttribute('hidden', 'true')
+    }
 }
 
 function makeDocChangesAfterAddingBoard(boardId, boardContent, defaultColumnsContent) {
