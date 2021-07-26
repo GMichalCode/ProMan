@@ -11,6 +11,8 @@ export let columnsManager = {
             const content = columnBuilder(boardId, column)
             domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content)
             domManager.addEventListener(`#column-title-${column.id}`, "change", changeColumnTitle);
+            domManager.addEventListener(`.column-remove[id="removeColumn${column.id}"]`, "click", deleteButtonHandler)
+
             await cardsManager.loadCards(boardId, column.id)
         }
     },
@@ -28,5 +30,11 @@ function changeColumnTitle(clickEvent) {
 }
 
 
-// function deleteButtonHandler(clickEvent) {
-// }
+function deleteButtonHandler(clickEvent) {
+    const columnToDelete = clickEvent.target.parentNode;
+    const columnId = columnToDelete.id.slice(12);
+    columnToDelete.parentNode.remove();
+
+    dataHandler.deleteColumn(columnId);
+    clickEvent.path[3].hidden = true
+}

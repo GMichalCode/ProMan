@@ -163,3 +163,20 @@ def delete_card(card_id):
         WHERE id = (%(card_id)s)
         """, {'card_id': card_id}
     )
+
+
+def delete_column(column_id):
+    data_manager.execute_update(
+        """
+        UPDATE columns
+        SET is_deleted = True
+        WHERE id = (%(column_id)s)
+        """, {'column_id': column_id}
+    )
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET is_deleted = True
+        WHERE column_id = (%(column_id)s)
+        """, {'column_id': column_id}
+    )

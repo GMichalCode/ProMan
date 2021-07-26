@@ -128,6 +128,12 @@ def delete_card(card_id: int):
     return """{"status": "success"}"""
 
 
+@app.route("/delete-column/<int:column_id>", methods=['DELETE'])
+@json_response
+def delete_column(column_id: int):
+    queries.delete_column(column_id)
+    return """{"status": "success"}"""
+
 def main():
     app.run(debug=True)
 
