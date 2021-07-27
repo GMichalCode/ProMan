@@ -55,6 +55,9 @@ export let dataHandler = {
      deleteColumn: async function (columnId) {
          return await apiDelete(`/delete-column/${columnId}`)
      },
+    deleteBoard: async function (boardId) {
+         return await apiDelete(`/delete-board/${boardId}`)
+     },
     register: async function (email, password) {
         let registerUser = {"email": email, "password": password}
         return await apiPost('/register', registerUser)
