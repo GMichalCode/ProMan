@@ -129,12 +129,12 @@ def update_board_title(board_id, new_board_title):
 
 
 def update_column_title(column_to_update_id, new_column_title):
-    data_manager.execute_select(
+    data_manager.execute_update(
         """
         UPDATE columns
         SET title = (%(new_column_title)s)
         WHERE id = (%(column_to_update_id)s)
-        """, {'new_column_title': new_column_title, 'column_to_update_id': column_to_update_id}, False
+        """, {'new_column_title': new_column_title, 'column_to_update_id': column_to_update_id}
     )
 
 
