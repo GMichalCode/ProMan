@@ -3,6 +3,8 @@ import os
 import psycopg2
 import psycopg2.extras
 
+connection = None
+
 
 def establish_connection(connection_data=None):
     """
@@ -51,22 +53,23 @@ def execute_select(statement, variables=None, fetchall=True):
     > execute_select('SELECT %(title)s; FROM shows', variables={'title': 'Codecool'})
     statement: SELECT statement
     variables:  optional parameter dict, optional parameter fetchall"""
-    result_set = []
-    with establish_connection() as conn:
-        with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-            cursor.execute(statement, variables)
-            result_set = cursor.fetchall() if fetchall else cursor.fetchone()
-    return result_set
+    global connection
+    if not connection:
+        connection = establish_connection()
+    with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+        cursor.execute(statement, variables)
+        return cursor.fetchall() if fetchall else cursor.fetchone()
 
 
 def execute_insert(statement, variables=None):
     with establish_connection() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
             cursor.execute(statement, variables)
-            result_set = cursor.fetchone()
+            result_set = cursor.fetchall() if fetchall else cursor.fetchone()
         return result_set
 
 def execute_update(statement, variables=None):
     with establish_connection() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
             cursor.execute(statement, variables)
+

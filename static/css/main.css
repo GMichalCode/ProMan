@@ -37,7 +37,7 @@ button {
 }
 
 .board-container {
-    max-width: 960px;
+    max-width: 90%;
     margin: 0 auto;
 
 }
@@ -73,7 +73,7 @@ section.board {
 .board-columns {
     display: flex;
     flex-wrap: nowrap;
-    /*justify-content: space-between;*/
+    /* justify-content: space-between; */
 }
 
 .board-column {
@@ -107,6 +107,16 @@ section.board {
     border-radius: var(--border-radius);
     margin: 4px 0;
     padding: 4px;
+}
+
+.active-card {
+    position: relative;
+    background: #ff0000;
+    color: #000000;
+    border-radius: var(--border-radius);
+    margin: 4px 0;
+    padding: 4px;
+    border: 4px deeppink;
 }
 
 .board-column:nth-of-type(1) .card {
@@ -256,14 +266,14 @@ section.board {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 30%;
 }
 
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
-  font-weight: bold;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
@@ -271,4 +281,8 @@ section.board {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.new-board-container {
+    text-align: center;
 }

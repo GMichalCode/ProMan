@@ -29,7 +29,7 @@ export let dataHandler = {
     },
     createNewBoard: async function (boardTitle) {
         // creates new board, saves it and calls the callback function with its data
-        await apiPost('/add-board', {'boardTitle': boardTitle})
+        return await apiPost('/add-board', {'boardTitle': boardTitle})
     },
     createNewCard: async function (cardTitle, boardId, columnId) {
         // creates new card, saves it and calls the callback function with its data
@@ -48,11 +48,23 @@ export let dataHandler = {
     signIn: async function (formData) {
         return await apiPost('/login', Object.fromEntries(formData))
     },
+
     deleteCard: async function (cardId){
         return await apiDelete(`/delete-card/${cardId}`)
     },
      deleteColumn: async function (columnId){
         return await apiDelete(`/delete-column/${columnId}`)
+
+    register: async function (email, password) {
+        let registerUser = {"email": email, "password": password}
+        return await apiPost('/register', registerUser)
+    },
+    login: async function (email, password) {
+        let loginUser = {"email": email, "password": password}
+        return await apiPost('/login', loginUser)
+    },
+    logout: async function() {
+        return await apiPost('/logout')
     }
 };
 
