@@ -24,7 +24,7 @@ export let columnsManager = {
 
 function changeColumnTitle(clickEvent) {
     let target = clickEvent.target;
-    let columnToUpdateID = target.id.slice(13, 16);
+    let columnToUpdateID = target.id.slice(13);
     let newColumnTitle = target.value;
     dataHandler.updateColumnTitle(columnToUpdateID, newColumnTitle);
 }
