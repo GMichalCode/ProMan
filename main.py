@@ -64,6 +64,8 @@ def get_column(column_id):
 #     return queries.get_cards_for_board(board_id)
 
 
+
+
 @app.route("/get-cards/<int:card_id>")
 @json_response
 def get_card(card_id: int):
@@ -111,6 +113,7 @@ def update_column_title():
     queries.update_column_title(column_to_update_id, new_column_title)
 
     return """{"status": "success"}"""
+
 
 
 @app.route("/login", methods=['POST'])
@@ -172,6 +175,19 @@ def verify_password(plain_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_bytes_password)
 
+
+@app.route("/delete-card/<int:card_id>", methods=['DELETE'])
+@json_response
+def delete_card(card_id: int):
+    queries.delete_card(card_id)
+    return """{"status": "success"}"""
+
+
+@app.route("/delete-column/<int:column_id>", methods=['DELETE'])
+@json_response
+def delete_column(column_id: int):
+    queries.delete_column(column_id)
+    return """{"status": "success"}"""
 
 def main():
     app.run(debug=True)

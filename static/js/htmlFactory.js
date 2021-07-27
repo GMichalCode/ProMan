@@ -33,11 +33,22 @@ function boardBuilder(board) {
     return `<div class="board-container">
                 <section class="board" data-board-id="${board.id}" id="board${board.id}">
                     <div class="board-header">
+
+
+                    <button class="board-add" data-board-id="${board.id}">Add Card</button>
+                    <button class="board-remove"  id="removeBoard${board.id}">Delete board</button>
+
+                    <button class="board-toggle" data-board-id="${board.id}">Show</button>
+           
+
+
+
                         <input class="board-title" maxlength="40" id="board-title-${board.id}" value="${board.title}" draggable="false">
                         <button class="board-add" data-board-id="${board.id}">Add Card</button>
-<!--                       
+                        <button class="board-remove"  id="removeBoard${board.id}">Delete board</button>
  <button class='board-toggle[data-board-id="${board.id}"]' data-board-id="${board.id}">Show<i class="fas fa-chevron-down"></i></button>-->
                     <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
+
                     </div>
            <div class="board-columns" data-board-id="${board.id}" id="board-${board.id}" hidden></div>
                 </section>
@@ -45,6 +56,7 @@ function boardBuilder(board) {
 }
 
 function cardBuilder(card) {
+
     return `<div class="card" data-card-id="${card.id}" id="card${card.id}" draggable="true" >
                 <div class="card-remove" id="removeCard${card.id}"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title" id="cardTitle${card.id}">${card.title}</div>
@@ -53,7 +65,10 @@ function cardBuilder(card) {
 
 function columnBuilder(boardId, column) {
     return `<div class="board-column" id="column${column.id}">
+                    <div class="column-header">
                     <input class="column-title" id="column-title-${column.id}" value="${column.title}">
+                    <div class="column-remove"  id="removeColumn${column.id}"><i class="fas fa-trash-alt"></i> </div>
+                    </div>
                     <div class='board${boardId}-column-content[data-column-id=${column.id}]' id='board${boardId}-column${column.id}-content'></div>
             </div>`
 }

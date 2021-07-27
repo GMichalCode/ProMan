@@ -48,6 +48,13 @@ export let dataHandler = {
     signIn: async function (formData) {
         return await apiPost('/login', Object.fromEntries(formData))
     },
+
+    deleteCard: async function (cardId){
+        return await apiDelete(`/delete-card/${cardId}`)
+    },
+     deleteColumn: async function (columnId){
+        return await apiDelete(`/delete-column/${columnId}`)
+
     register: async function (email, password) {
         let registerUser = {"email": email, "password": password}
         return await apiPost('/register', registerUser)
