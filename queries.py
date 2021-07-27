@@ -183,6 +183,38 @@ def delete_column(column_id):
         """, {'column_id': column_id}
     )
 
+
+def delete_board(board_id):
+    data_manager.execute_update(
+        """
+        UPDATE boards
+        SET is_deleted = True
+        WHERE id = (%(board_id)s)
+        """, {'board_id': board_id}
+    )
+    data_manager.execute_update(
+        """
+        UPDATE columns
+        SET is_deleted = True
+        WHERE board_id = (%(board_id)s)
+        """, {'board_id': board_id}
+    )
+    column_id = data_manager.execute_select(
+        """
+        SELECT id
+        FROM columns
+        WHERE board_id = (%(board_id)s)
+        """, {'board_id': board_id}
+    )
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET is_deleted = True
+        WHERE column_id = (%(column_id)s)
+        """, {'column_id': column_id}
+    )
+
+
 def register_new_user(email, password):
     data_manager.execute_insert(
         """
