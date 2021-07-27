@@ -32,23 +32,11 @@ export function htmlFactory(template) {
 function boardBuilder(board) {
     return `<div class="board-container">
                 <section class="board" data-board-id="${board.id}" id="board${board.id}">
-                    <div class="board-header">
-
-
-                    <button class="board-add" data-board-id="${board.id}">Add Card</button>
-                    <button class="board-remove"  id="removeBoard${board.id}">Delete board</button>
-
-                    <button class="board-toggle" data-board-id="${board.id}">Show</button>
-           
-
-
-
+                    <div class="board-header">          
                         <input class="board-title" maxlength="40" id="board-title-${board.id}" value="${board.title}" draggable="false">
                         <button class="board-add" data-board-id="${board.id}">Add Card</button>
                         <button class="board-remove"  id="removeBoard${board.id}">Delete board</button>
- <button class='board-toggle[data-board-id="${board.id}"]' data-board-id="${board.id}">Show<i class="fas fa-chevron-down"></i></button>-->
-                    <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
-
+                        <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
                     </div>
            <div class="board-columns" data-board-id="${board.id}" id="board-${board.id}" hidden></div>
                 </section>
