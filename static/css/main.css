@@ -136,7 +136,7 @@ section.board {
 }
 
 .card-remove {
-    display: block;
+    display: inline-block;
     position: absolute;
     top: 4px;
     right: 4px;
@@ -157,7 +157,7 @@ section.board {
 }
 
 .card-title {
-    padding-right: 16px;
+    margin-right: 20px;
 }
 
 .ul {
@@ -189,6 +189,9 @@ section.board {
 
 .card-title {
     border: 0 transparent;
+    background: transparent;
+    width: auto;
+
 }
 
 .ul {

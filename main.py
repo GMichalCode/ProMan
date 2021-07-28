@@ -113,6 +113,16 @@ def update_column_title():
     return """{"status": "success"}"""
 
 
+@app.route("/update-card-title", methods=['PUT'])
+@json_response
+def update_card_title():
+    card_to_update_id = request.json['cardID']
+    new_card_title = request.json['newCardTitle']
+    queries.update_card_title(card_to_update_id, new_card_title)
+
+    return """{"status": "success"}"""
+
+
 @app.route("/login", methods=['POST'])
 def login():
     email = request.json['email']
