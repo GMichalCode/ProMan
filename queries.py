@@ -138,6 +138,16 @@ def update_column_title(column_to_update_id, new_column_title):
     )
 
 
+def update_card_title(card_to_update_id, new_card_title):
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET title = (%(new_card_title)s)
+        WHERE id = (%(card_to_update_id)s)
+        """, {'new_card_title': new_card_title, 'card_to_update_id': card_to_update_id}
+    )
+
+
 def get_column_cards(column_id):
     return data_manager.execute_select("""
     SELECT * FROM cards

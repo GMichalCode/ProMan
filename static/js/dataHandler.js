@@ -45,6 +45,10 @@ export let dataHandler = {
         let newColumnTitleToUpdate = {'columnID': columnToUpdateID, 'newColumnTitle': newColumnTitle}
         await apiPut(`/update-column-title`, newColumnTitleToUpdate)
     },
+    updateCardTitle: async function (cardToUpdateID, newCardTitle){
+        let newCardTitleToUpdate = {'cardID': cardToUpdateID, 'newCardTitle': newCardTitle}
+        await apiPut(`/update-card-title`, newCardTitleToUpdate)
+    },
     signIn: async function (formData) {
         return await apiPost('/login', Object.fromEntries(formData))
     },

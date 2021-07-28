@@ -50,7 +50,9 @@ function cardBuilder(card) {
 
     return `<div class="card" data-card-id="${card.id}" id="card${card.id}" draggable="true" >
                 <div class="card-remove" id="removeCard${card.id}"><i class="fas fa-trash-alt"></i></div>
-                <input class="card-title" id="card-title-${card.id}" value="${card.title}">
+<!--                <input class="card-title" id="card-title-${card.id}" value="${card.title}">-->
+                <input class="card-title" maxlength="40" id="card-title-${card.id}" value="${card.title}" draggable="true">
+            
             </div>`;
 }
 

@@ -24,6 +24,8 @@ export let cardsManager = {
             // domManager.addChild(`.board${boardId}-column-content[data-column-id="${card.columnId}"]`, content);
             domManager.addChild(`#board${boardId}-column${columnId}-content`, content);
             domManager.addEventListener(`.card-remove[id="removeCard${card.id}"]`, "click", deleteButtonHandler)
+            domManager.addEventListener(`#card-title-${card.id}`, "change", changeCardTitle);
+
         }
     },
 }
@@ -34,6 +36,14 @@ function deleteButtonHandler(clickEvent) {
     cardToDelete.parentNode.remove();
     return dataHandler.deleteCard(cardId);
 }
+
+function changeCardTitle(clickEvent) {
+    let target = clickEvent.target;
+    let cardToUpdateID = target.id.slice(11);
+    let newCardTitle = target.value;
+    dataHandler.updateCardTitle(cardToUpdateID, newCardTitle);
+}
+
 
 // function cardDragStart(dragEvent) {
 // }

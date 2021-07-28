@@ -34,7 +34,6 @@ function deleteButtonHandler(clickEvent) {
     const columnToDelete = clickEvent.target.parentNode;
     const columnId = columnToDelete.id.slice(12);
     columnToDelete.parentNode.remove();
-
     dataHandler.deleteColumn(columnId);
     clickEvent.path[3].hidden = true
 }
