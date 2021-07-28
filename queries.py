@@ -166,7 +166,6 @@ def add_default_columns(board_id):
     """, {"board_id": board_id})
 
 
-
 def delete_card(card_id):
     data_manager.execute_update(
         """
@@ -235,13 +234,12 @@ def register_new_user(email, password):
 
 
 def check_new_user(email):
-    query = f"SELECT * FROM users WHERE email='{email}';"
     return data_manager.execute_select(
         f"""
         SELECT email
         FROM users
         WHERE email='{email}';
-        """, {'email' : email}, False
+        """, {'email': email}, False
     )
 
 
@@ -254,11 +252,3 @@ def login(email, fetchall=True):
         """, {'email': email}, fetchall)
 
 
-def get_user_by_id(user_id):
-    return data_manager.execute_select(
-        """
-        SELECT * 
-        FROM users
-        WHERE id=%(id)s
-        """, {'id': user_id}, False
-    )

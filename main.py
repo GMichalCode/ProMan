@@ -1,5 +1,6 @@
 import re
-
+import uuid
+from datetime import datetime, timedelta
 import bcrypt
 from flask import Flask, render_template, url_for, request, make_response, jsonify
 
@@ -9,7 +10,7 @@ from util import json_response
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/ProMan'
 
-sessions = []
+sessions = {}
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -17,8 +18,11 @@ def index():
     """
     This is a one-pager which shows all the boards and cards
     """
-    return render_template('index.html')
-    # return render_template('index.html', logged=authenticate_user(request))
+    if authenticate_user(request) is None:
+        logged = False
+    else:
+        logged = True
+    return render_template('index.html', logged=logged)
 
 
 @app.route("/get-boards")
@@ -130,8 +134,11 @@ def login():
     user_from_db = queries.login(email, False)
     if user_from_db is not None and verify_password(password, user_from_db['password']):
         resp = make_response(jsonify({'message': "Ok"}))
-        resp.set_cookie('SESSION', str(user_from_db['id']))
-        sessions.append(user_from_db['id'])
+        rng_cookie = str(uuid.uuid4())
+        resp.set_cookie('SESSION', rng_cookie)
+        global sessions
+        sessions[rng_cookie] = {'id': user_from_db['id'], 'email': user_from_db['email'],
+                                'expiration': datetime.now() + timedelta(minutes=10)}
         return resp
     else:
         return {'message': "Incorrect email/password"}
@@ -158,19 +165,24 @@ def registration():
 
 @app.route('/logout', methods=["POST"])
 def logout():
-    id_authenticator = int(request.cookies.get('SESSION'))
-    sessions.remove(id_authenticator)
+    global sessions
+    id_authenticator = request.cookies.get('SESSION')
+    sessions.pop(id_authenticator)
     return {'message': "Ok"}, 200
 
 
-# def authenticate_user(request):
-#     id_authenticator = int(request.cookies.get('SESSION'))
-#     return id_authenticator in sessions
-
-
-# def current_user(request):
-#     current_user_id = request.cookies.get('SESSION')
-#     return queries.get_user_by_id(current_user_id)
+def authenticate_user(request):
+    global sessions
+    id_authenticator = request.cookies.get('SESSION')
+    user_from_session = sessions.get(id_authenticator)
+    if user_from_session is None:
+        return None
+    else:
+        if user_from_session['expiration'] < datetime.now():
+            sessions.pop(id_authenticator)
+            return None
+        else:
+            return user_from_session
 
 
 def hash_password(plain_password):
