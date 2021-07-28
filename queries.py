@@ -155,13 +155,34 @@ def get_column_cards(column_id):
     """, {'column_id': column_id})
 
 
+def add_column(board_id):
+    return data_manager.execute_upate("""
+        INSERT INTO columns (title, is_deleted, board_id, column_order)
+        VALUES ('New', false, %(board_id)s, 99)
+        """, {"board_id": board_id})
+
+
+def add_card(board_id):
+    column_id = data_manager.execute_select("""
+            SELECT id from columns 
+            WHERE board_id = %(board_id)s
+            GROUP BY column_order, id 
+            LIMIT 1 
+            """, {"board_id": board_id})
+
+    return data_manager.execute_update("""
+        INSERT INTO cards (title, is_deleted, column_id, card_order)
+        VALUES ('New', false, %(column_id)s, 99)
+        """, {"column_id": column_id})
+
+
 def add_default_columns(board_id):
     return data_manager.execute_select("""
     INSERT INTO columns (title, is_deleted, board_id, column_order)
-    VALUES ('New', false, %(board_id)s, 99),
-            ('In Progress', false, %(board_id)s, 99),
-            ('Testing', false, %(board_id)s, 99),
-            ('Done', false, %(board_id)s, 99)
+    VALUES ('New', false, %(board_id)s, 1),
+            ('In Progress', false, %(board_id)s, 2),
+            ('Testing', false, %(board_id)s, 2),
+            ('Done', false, %(board_id)s, 4)
     RETURNING id
     """, {"board_id": board_id})
 

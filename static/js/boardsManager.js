@@ -13,6 +13,8 @@ export let boardsManager = {
             domManager.addEventListener(`.board-toggle[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
             domManager.addEventListener(`#board-title-${board.id}`, "change", changeBoardTitle);
             domManager.addEventListener(`.board-remove[id="removeBoard${board.id}"]`, "click", deleteButtonHandler)
+            domManager.addEventListener(`.board-add-card[id="addCard${board.id}"]`, "click", addCard)
+            domManager.addEventListener(`.board-add-column[id="addColumn${board.id}"]`, "click", addColumn)
 
             await columnsManager.loadColumns(board.id)
         }
@@ -100,4 +102,17 @@ function deleteButtonHandler(clickEvent) {
     boardToDelete.parentNode.remove();
     dataHandler.deleteBoard(boardId);
     clickEvent.path[3].hidden = true
+}
+
+function addCard(clickEvent) {
+    const boardAddTo = clickEvent.target;
+    const boardId = boardAddTo.id.slice(7);
+    dataHandler.addCard(boardId)
+
+}
+function addColumn(clickEvent) {
+    const boardAddTo = clickEvent.target;
+    const boardId = boardAddTo.id.slice(9);
+    dataHandler.addColumn(boardId)
+
 }

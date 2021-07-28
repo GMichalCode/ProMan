@@ -87,10 +87,20 @@ def add_board():
     return [{"new_board_id": new_board_id}, {"new_columns_ids": new_columns_ids}]
 
 
-@app.route("/add-card")
+@app.route("/add-card", methods=['POST'])
 @json_response
 def add_card():
-    pass
+    board_id = request.json['boardId']
+    queries.add_card(board_id)
+    return """{"status": "success"}"""
+
+
+@app.route("/add-column", methods=['POST'])
+@json_response
+def add_column():
+    board_id = request.json['boardId']
+    queries.add_column(board_id)
+    return """{"status": "success"}"""
 
 
 @app.route("/update-board-title", methods=['PUT'])

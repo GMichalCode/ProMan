@@ -72,6 +72,14 @@ export let dataHandler = {
     },
     logout: async function() {
         return await apiPost('/logout')
+    },
+    addCard: async function (boardId) {
+        // creates new board, saves it and calls the callback function with its data
+        return await apiPost('/add-card', {'boardId': boardId})
+    },
+    addColumn: async function (boardId) {
+        // creates new board, saves it and calls the callback function with its data
+        return await apiPost('/add-column', {'boardId': boardId})
     }
 };
 

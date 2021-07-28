@@ -34,8 +34,8 @@ function boardBuilder(board) {
                 <section class="board" data-board-id="${board.id}" id="board${board.id}">
                     <div class="board-header">          
                         <input class="board-title" maxlength="40" id="board-title-${board.id}" value="${board.title}" draggable="false">
-                        <button class="board-add-card" data-board-id="${board.id}">Add Card</button>
-                        <button class="board-add-column" data-board-id="${board.id}">Add Column</button>
+                        <button class="board-add-card" id="addCard${board.id}">Add Card</button>
+                        <button class="board-add-column" id="addColumn${board.id}">Add Column</button>
                         <div class="board-remove"  id="removeBoard${board.id}">
                         <button class="board-remove">Delete board</button>
                         </div>
