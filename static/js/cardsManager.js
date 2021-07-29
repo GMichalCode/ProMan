@@ -58,6 +58,10 @@ function onDragStartHandler(event) {
 function onDragEndHandler(event) {
     console.debug("on drag end: " + event.target.id)
     event.dataTransfer.setData('plain/text', event.target.getAttribute('id'));
+    let dropzones = document.querySelectorAll(`.dropzone`)
+    dropzones.forEach(function (dropzone) {
+        dropzone.setAttribute('hidden', "")
+    })
 }
 
 function setDragEnterAndLeave(list) {
@@ -70,7 +74,6 @@ function setDragEnterAndLeave(list) {
 function onDragEnterHandler(event) {
     // console.debug("on drag enter: " + event.target.id)
     event.dataTransfer.getData('plain/text')
-    event.target.innerHTML = "Drop here to add!" + event.dataTransfer.getData("plain/text")
 }
 
 function onDragLeaveHandler(event) {
@@ -92,6 +95,8 @@ function onDropHandler(event) {
     dropzones.forEach(function (dropzone) {
         dropzone.setAttribute('hidden', "")
     })
+//todo: jak odczytać id elementu draggowanego
+
 }
 
 function onDragOverHandler(event) {

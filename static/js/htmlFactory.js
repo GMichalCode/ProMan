@@ -44,6 +44,8 @@ function boardBuilder(board) {
                     </div>
                     <div class="board-columns" data-board-id="${board.id}" id="board-${board.id}" hidden></div>
                 </section>
+            
+                
            </div> `
 }
 
