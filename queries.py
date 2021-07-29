@@ -10,7 +10,7 @@ def get_card_column(column_id):
     column = data_manager.execute_select(
         """
         SELECT * FROM columns
-        WHERE id = %(column_id)s AND is_deleted = FALSE
+        WHERE (id = %(column_id)s AND is_deleted = FALSE)
         ;
         """, {"column_id": column_id})
 
@@ -55,7 +55,7 @@ def get_card(card_id):
     card = data_manager.execute_select(
         """
         SELECT * FROM cards c
-        WHERE c.id = %(card_id)s AND c.is_deleted = FALSE
+        WHERE (c.id = %(card_id)s AND c.is_deleted = False)
         ;
         """, {"card_id": card_id}, False)
 
@@ -129,19 +129,29 @@ def update_board_title(board_id, new_board_title):
 
 
 def update_column_title(column_to_update_id, new_column_title):
-    data_manager.execute_select(
+    data_manager.execute_update(
         """
         UPDATE columns
         SET title = (%(new_column_title)s)
         WHERE id = (%(column_to_update_id)s)
-        """, {'new_column_title': new_column_title, 'column_to_update_id': column_to_update_id}, False
+        """, {'new_column_title': new_column_title, 'column_to_update_id': column_to_update_id}
+    )
+
+
+def update_card_title(card_to_update_id, new_card_title):
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET title = (%(new_card_title)s)
+        WHERE id = (%(card_to_update_id)s)
+        """, {'new_card_title': new_card_title, 'card_to_update_id': card_to_update_id}
     )
 
 
 def get_column_cards(column_id):
     return data_manager.execute_select("""
     SELECT * FROM cards
-    WHERE column_id = %(column_id)s
+    WHERE column_id = %(column_id)s AND is_deleted = False
     """, {'column_id': column_id})
 
 
@@ -156,6 +166,64 @@ def add_default_columns(board_id):
     """, {"board_id": board_id})
 
 
+def delete_card(card_id):
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET is_deleted = True
+        WHERE id = (%(card_id)s)
+        """, {'card_id': card_id}
+    )
+
+
+def delete_column(column_id):
+    data_manager.execute_update(
+        """
+        UPDATE columns
+        SET is_deleted = True
+        WHERE id = (%(column_id)s)
+        """, {'column_id': column_id}
+    )
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET is_deleted = True
+        WHERE column_id = (%(column_id)s)
+        """, {'column_id': column_id}
+    )
+
+
+def delete_board(board_id):
+    data_manager.execute_update(
+        """
+        UPDATE boards
+        SET is_deleted = True
+        WHERE id = (%(board_id)s)
+        """, {'board_id': board_id}
+    )
+    data_manager.execute_update(
+        """
+        UPDATE columns
+        SET is_deleted = True
+        WHERE board_id = (%(board_id)s)
+        """, {'board_id': board_id}
+    )
+    column_id = data_manager.execute_select(
+        """
+        SELECT id
+        FROM columns
+        WHERE board_id = (%(board_id)s)
+        """, {'board_id': board_id}
+    )
+    data_manager.execute_update(
+        """
+        UPDATE cards
+        SET is_deleted = True
+        WHERE column_id = (%(column_id)s)
+        """, {'column_id': column_id}
+    )
+
+
 def register_new_user(email, password):
     data_manager.execute_insert(
         """
@@ -166,13 +234,12 @@ def register_new_user(email, password):
 
 
 def check_new_user(email):
-    query = f"SELECT * FROM users WHERE email='{email}';"
     return data_manager.execute_select(
         f"""
         SELECT email
         FROM users
         WHERE email='{email}';
-        """, {'email' : email}, False
+        """, {'email': email}, False
     )
 
 
@@ -185,11 +252,3 @@ def login(email, fetchall=True):
         """, {'email': email}, fetchall)
 
 
-def get_user_by_id(user_id):
-    return data_manager.execute_select(
-        """
-        SELECT * 
-        FROM users
-        WHERE id=%(id)s
-        """, {'id': user_id}, False
-    )

@@ -9,6 +9,9 @@ export let cardsManager = {
             const cardBuilder = htmlFactory(htmlTemplates.card);
             const content = cardBuilder(card)
             domManager.addChild(`#board${boardId}-column${columnId}-content`, content);
+            domManager.addEventListener(`.card-remove[id="removeCard${card.id}"]`, "click", deleteButtonHandler)
+            domManager.addEventListener(`#card-title-${card.id}`, "change", changeCardTitle);
+
         }
         setDragStartAndDragEnd(document.querySelectorAll(`.card`));
         setDragEnterAndLeave(document.querySelectorAll('.dropzone'));
@@ -17,7 +20,20 @@ export let cardsManager = {
     },
 }
 
-// function deleteButtonHandler(clickEvent) {
+function deleteButtonHandler(clickEvent) {
+    const cardToDelete = clickEvent.target.parentNode;
+    const cardId = cardToDelete.id.slice(10);
+    cardToDelete.parentNode.remove();
+    return dataHandler.deleteCard(cardId);
+}
+
+function changeCardTitle(clickEvent) {
+    let target = clickEvent.target;
+    let cardToUpdateID = target.id.slice(11);
+    let newCardTitle = target.value;
+    dataHandler.updateCardTitle(cardToUpdateID, newCardTitle);
+}
+
 
 function setDragStartAndDragEnd(list) {
     list.forEach(function (el) {

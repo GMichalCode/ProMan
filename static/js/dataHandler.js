@@ -45,9 +45,23 @@ export let dataHandler = {
         let newColumnTitleToUpdate = {'columnID': columnToUpdateID, 'newColumnTitle': newColumnTitle}
         await apiPut(`/update-column-title`, newColumnTitleToUpdate)
     },
+    updateCardTitle: async function (cardToUpdateID, newCardTitle){
+        let newCardTitleToUpdate = {'cardID': cardToUpdateID, 'newCardTitle': newCardTitle}
+        await apiPut(`/update-card-title`, newCardTitleToUpdate)
+    },
     signIn: async function (formData) {
         return await apiPost('/login', Object.fromEntries(formData))
     },
+
+    deleteCard: async function (cardId){
+        return await apiDelete(`/delete-card/${cardId}`)
+    },
+     deleteColumn: async function (columnId) {
+         return await apiDelete(`/delete-column/${columnId}`)
+     },
+    deleteBoard: async function (boardId) {
+         return await apiDelete(`/delete-board/${boardId}`)
+     },
     register: async function (email, password) {
         let registerUser = {"email": email, "password": password}
         return await apiPost('/register', registerUser)

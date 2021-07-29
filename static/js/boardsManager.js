@@ -12,6 +12,8 @@ export let boardsManager = {
             domManager.addChild('#root', content);
             domManager.addEventListener(`.board-toggle[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
             domManager.addEventListener(`#board-title-${board.id}`, "change", changeBoardTitle);
+            domManager.addEventListener(`.board-remove[id="removeBoard${board.id}"]`, "click", deleteButtonHandler)
+
             await columnsManager.loadColumns(board.id)
         }
     },
@@ -90,4 +92,12 @@ function changeBoardTitle(clickEvent) {
     let boardToUpdateID = target.id.slice(12, 16);
     let newBoardTitle = target.value;
     dataHandler.updateBoardTitle(boardToUpdateID, newBoardTitle)
+}
+
+function deleteButtonHandler(clickEvent) {
+    const boardToDelete = clickEvent.target.parentNode;
+    const boardId = boardToDelete.id.slice(11);
+    boardToDelete.parentNode.remove();
+    dataHandler.deleteBoard(boardId);
+    clickEvent.path[3].hidden = true
 }

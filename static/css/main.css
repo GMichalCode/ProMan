@@ -61,7 +61,7 @@ section.board {
     font-size: 20px;
 }
 
-.board-title, .board-add, .board-toggle {
+.board-title, .board-add, .board-toggle, .board-add-column, .board-add-card  {
     display: inline-block;
 }
 
@@ -77,11 +77,8 @@ section.board {
 }
 
 .board-column {
-    padding: 10px;
-    flex: 1;
-    /*display: flex;*/
-    /*justify-content: space-between;*/
-
+    padding: 1px;
+    margin: 5px;
 }
 
 .board-column-content {
@@ -100,6 +97,7 @@ section.board {
 
 .board-column-title {
     text-align: center;
+    display: inline-block;
 }
 
 .card {
@@ -128,7 +126,7 @@ section.board {
 }
 
 .card-remove {
-    display: block;
+    display: inline-block;
     position: absolute;
     top: 4px;
     right: 4px;
@@ -136,8 +134,20 @@ section.board {
     cursor: pointer;
 }
 
+.column-remove {
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-top: 5px;
+    margin-right: 2px;
+}
+
+.board-remove {
+    display: inline-block;
+}
+
 .card-title {
-    padding-right: 16px;
+    margin-right: 20px;
 }
 
 .ul {
@@ -151,6 +161,10 @@ section.board {
 .span {
     background-color: #594300;
 }
+.column-header{
+    background-color: white;
+    display: flex;
+}
 
 .board-title {
     border: 0 transparent;
@@ -160,11 +174,14 @@ section.board {
 .column-title {
     border: 0 transparent;
     background: transparent;
-}
+    width: auto;
+    }
 
 .card-title {
     border: 0 transparent;
-    /*background: #ffffff90;*/
+    background: transparent;
+    width: auto;
+
 }
 
 .ul {
