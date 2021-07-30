@@ -1,6 +1,7 @@
 import re
 import uuid
 from datetime import datetime, timedelta
+
 import bcrypt
 from flask import Flask, render_template, url_for, request, make_response, jsonify
 
@@ -22,7 +23,13 @@ def index():
         logged = False
     else:
         logged = True
-    return render_template('index.html', logged=logged)
+    return render_template('test.html', logged=logged)
+
+
+# @app.route("/test")
+# def index():
+#
+#     return render_template('test.html')
 
 
 @app.route("/get-boards")

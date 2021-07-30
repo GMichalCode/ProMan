@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Draggable + Sortable</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {#  <link rel="stylesheet" href="/resources/demos/style.css">#}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin: 5px;
+            padding: 5px;
+            width: 150px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#column1, #column2, #column3, #column4").sortable({
+                connectWith: ".connectedSortable",
+                cursor: "crosshair",
+                revert: true
+            }).disableSelection();
+            $("#add-new-card").draggable({
+                cursor: "crosshair",
+                connectToSortable: "#column1, #column2, #column3",
+                helper: "clone",
+                revert: "invalid"
+            });
+            $("ul, li").disableSelection();
+        });
+    </script>
+</head>
+<body>
+<ul>
+    <li id="add-new-card" class="ui-state-highlight card">Add new card</li>
+</ul>
+<div class="container" id="root">
+    <div>
+        <ul id="column1" class="connectedSortable">
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title1" value="card 1"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title2" value="card 2"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title3" value="card 3"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title4" value="card 4"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title5" value="card 5"
+                                                     draggable="false"></li>
+        </ul>
+    </div>
+    <div>
+        <ul id="column2" class="connectedSortable">
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title6" value="card 6"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title7" value="card 7"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title8" value="card 8"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title9" value="card 9"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title10" value="card 10"
+                                                     draggable="false"></li>
+        </ul>
+    </div>
+    <div>
+        <ul id="column3" class="connectedSortable">
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title11" value="card 11"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title12" value="card 12"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title13" value="card 13"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title14" value="card 14"
+                                                     draggable="false"></li>
+            <li class="ui-state-default card"><input class="card-title" maxlength="40" id="card-title15" value="card 15"
+                                                     draggable="false"></li>
+        </ul>
+    </div>
+</div>
+<script type="module" src="{{ url_for('static', filename='js/test.js') }}" defer></script>
+</body>
+</html>

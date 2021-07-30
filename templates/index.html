@@ -26,12 +26,10 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 {#     //////////////////////////////// #}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Draggable + Sortable</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
   <style>
   ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
   li { margin: 5px; padding: 5px; width: 150px; }
@@ -44,39 +42,42 @@
       revert: true
     });
     $( "#draggable2" ).draggable({
-      connectToSortable: "#sortable2",
-      helper: "clone",
-      revert: "invalid"
+        connectToSortable: "#sortable2",
+        helper: "clone",
+        revert: "invalid"
     });
-    $( "ul, li" ).disableSelection();
-  } );
+      $("ul, li").disableSelection();
+  });
   </script>
-{#///////////////////////#}
+    {#///////////////////////#}
 </head>
 <body>
-
-
+{#///////////////////////#}
 <ul>
-<li id="draggable2" class="ui-state-highlight">Drag me down</li>
+    <li id="draggable2" class="ui-state-highlight">Drag me down</li>
 </ul>
-
 <ul id="sortable2">
-  <li class="ui-state-default">Item 1</li>
-  <li class="ui-state-default">Item 2</li>
-  <li class="ui-state-default">Item 3</li>
-  <li class="ui-state-default">Item 4</li>
-  <li class="ui-state-default">Item 5</li>
+    <li class="ui-state-default">Item 1</li>
+    <li class="ui-state-default">Item 2</li>
+    <li class="ui-state-default">Item 3</li>
+    <li class="ui-state-default">Item 4</li>
+    <li class="ui-state-default">Item 5</li>
 </ul>
+{#///////////////////////#}
 
 
-    <div id="navbar">
-        <ul>
-            <li><a href="#home">Home</a></li>
-            {% if logged %}
-                <li style="float:right"><button class="active" id="logout">Log Out</button></li>
-            {% else %}
-                <li style="float:right"><button class="active" id="login">Log In</button></li>
-                <a></a>
+<div id="navbar">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        {% if logged %}
+            <li style="float:right">
+                <button class="active" id="logout">Log Out</button>
+            </li>
+        {% else %}
+            <li style="float:right">
+                <button class="active" id="login">Log In</button>
+            </li>
+            <a></a>
                 <li style="float:right"><button class="active" id="signIn">Sign In</button></li>
             {% endif %}
         </ul>

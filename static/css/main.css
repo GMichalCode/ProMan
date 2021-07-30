@@ -59,6 +59,7 @@ section.board {
     margin: 13px;
     display: inline-block;
     font-size: 20px;
+    max-width: 80%;
 }
 
 .board-title, .board-add, .board-toggle, .board-add-column, .board-add-card  {
@@ -102,7 +103,7 @@ section.board {
 
 .card {
     position: relative;
-    background: #222;
+    background: #ff4141;
     color: #fff;
     border-radius: var(--border-radius);
     margin: 4px 0;
@@ -209,6 +210,7 @@ section.board {
 .card-title {
     border: 0 transparent;
     color: white;
+    width: 80%
     /* background: #ffffff90; */
 }
 
@@ -288,4 +290,8 @@ section.board {
     border-radius: var(--border-radius);
     margin: 4px 0;
     padding: 4px;
+}
+
+.container {
+    display: flex;
 }

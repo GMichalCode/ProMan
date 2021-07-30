@@ -6,9 +6,9 @@ init();
 
 function init() {
     initCreateBoardButton();
-    signInManager.addEventListener()
-    logInManager.addEventListener()
-    boardsManager.loadBoards()
+    signInManager.addEventListener();
+    logInManager.addEventListener();
+    boardsManager.loadBoards();
 }
 
 function initCreateBoardButton() {
